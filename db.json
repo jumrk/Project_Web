@@ -7,6 +7,14 @@
       "passwordUser": "thuan123",
       "phoneUser": "0373532273",
       "addressUser": "Quảng Nam"
+    },
+    {
+      "id": 2,
+      "nameUser": "",
+      "emailUser": "1@gmail.com",
+      "passwordUser": "1",
+      "phoneUser": "",
+      "addressUser": ""
     }
   ],
   "Product": [
