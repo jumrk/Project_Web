@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    width: 100%;
+    height: auto;
+}
+
+.header {
+    width: 100%;
+    height: auto;
+}
+
+.header-information {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    background-color: black;
+    color: white;
+}
+
+.notice-freeShip {
+    display: flex;
+    gap: 5px;
+    color: white;
+}
+
+.notice-freeShip div p {
+    font-weight: 500;
+}
+
+.notice-freeShip div ion-icon {
+    width: 30px;
+    height: 30px;
+    padding-top: 9px;
+}
+
+.header-event-active {
+    position: relative;
+}
+
+.header-event-menu {
+    z-index: 1000;
+}
+
+.button-event-menu ion-icon {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    padding-left: 10px;
+    transition: transform ease 0.5s;
+}
+
+.button-event-menu ion-icon:hover {
+    transform: scale(1.5);
+}
+
+.event-menu {
+    position: fixed;
+    width: calc(100% - 300px);
+    top: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    opacity: 0;
+    transition: opacity ease-in-out 0.7s;
+    visibility: hidden;
+    cursor: pointer;
+    float: right;
+}
+
+.items-event-menu {
+    position: fixed;
+    transform: translateX(-100%);
+    overflow: hidden;
+    transition: transform ease-in-out 0.5s;
+    background-color: rgb(254, 254, 254);
+    height: 100%;
+    top: 0;
+    width: 300px;
+}
+
+.items-event-menu ul {
+    height: 100%;
+    padding: 0;
+}
+
+.items-menu-title {
+    display: flex;
+    width: 100%;
+    text-align: center;
+    padding: 0;
+}
+
+.items-menu-title b {
+    font-size: 20px;
+    font-weight: 400;
+    width: 100%;
+    position: absolute;
+    z-index: 0;
+}
+
+.items-menu-title ion-icon {
+    width: 30px;
+    height: 30px;
+    font-weight: 400;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.items-event-menu ul li {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    height: 8%;
+}
+
+.items-event-menu ul li p {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+.items-event-menu ul li p:hover {
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    transition: background-color ease 0.5s, color ease 0.5s;
+}
+
+.header-event {
+    display: flex;
+    justify-content: space-between;
+    height: 100px;
+    background-color: white;
+    align-items: center;
+}
+
+.header-event-logo img {
+    max-width: 100%;
+    max-height: 50px;
+}
+
+.header-event-user {
+    display: flex;
+    gap: 10px;
+}
+
+.header-event-user div a {
+    list-style: none;
+    color: black;
+}
+
+.header-event-user div ion-icon {
+    width: 20px;
+    height: 20px;
+    padding-right: 5px;
+    transition: transform ease 0.5s;
+}
+
+.header-event-user div ion-icon:hover {
+    transform: scale(1.5);
+}
+
+.header-search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 0;
+    transition: all ease-in-out 0.5s;
+    overflow: hidden;
+    width: 100%;
+    background-color: white;
+    top: 0;
+    gap: 10px;
+}
+
+.header-search ion-icon {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.header-search div {
+    display: flex;
+    width: 500px;
+    height: 40%;
+    background-color: white;
+    border-radius: 5px;
+    align-items: center;
+    border: 1px solid gray;
+    padding: 5px;
+}
+
+.header-search div input {
+    width: 90%;
+    border: none;
+    height: 100%;
+    border-radius: 10px;
+    outline: none;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.header-search div button ion-icon {
+    width: 10%;
+    height: 60%;
+    cursor: pointer;
+}
+
+.header-search div input::placeholder {
+    font-weight: 400;
+    color: darkgray;
+}

@@ -1,0 +1,73 @@
+{
+  "User": [
+    {
+      "id": 1,
+      "nameUser": "Thuan",
+      "emailUser": "Jumrk03@gmail.com",
+      "passwordUser": "thuan123",
+      "phoneUser": "0373532273",
+      "addressUser": "Quảng Nam"
+    }
+  ],
+  "Product": [
+    {
+      "id": 1,
+      "nameProduct": "Áo",
+      "idCategories": 1,
+      "imageProduct": "ádadsadsad",
+      "descriptionProduct": "đẹp",
+      "quantityProduct": 10,
+      "colorProduct": [
+        "blue",
+        "red",
+        "black"
+      ],
+      "sizeProduct": [
+        "S",
+        "M",
+        "XL"
+      ]
+    }
+  ],
+  "Categories": [
+    {
+      "id": 1,
+      "nameCategories": "Áo thun"
+    }
+  ],
+  "Cart": [
+    {
+      "id": 1,
+      "idProduct": 1,
+      "idUser": 1,
+      "quantityCart": 1,
+      "sizeCart": "S",
+      "colorCart": "blue"
+    }
+  ],
+  "Order": [
+    {
+      "id": 1,
+      "idUser": 1,
+      "dateOrder": "11-04-2003",
+      "statusOrder": "Đang xác nhận"
+    }
+  ],
+  "orderDetails": [
+    {
+      "id": 1,
+      "idOrder": 1,
+      "idProduct": 1,
+      "quantityOrder": 2,
+      "colorOrder": "blue",
+      "sizeOrder": "S"
+    }
+  ],
+  "Admin": [
+    {
+      "id": 1,
+      "nameAdmin": "thuan",
+      "passwordAdmin": "thuan123"
+    }
+  ]
+}
