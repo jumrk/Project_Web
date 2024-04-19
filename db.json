@@ -1,7 +1,7 @@
 {
   "User": [
     {
-      "id": 1,
+      "id": "1",
       "nameUser": "Thuan",
       "emailUser": "Jumrk03@gmail.com",
       "passwordUser": "thuan123",
@@ -11,7 +11,7 @@
   ],
   "Product": [
     {
-      "id": 1,
+      "id": "1",
       "nameProduct": "Áo",
       "idCategories": 1,
       "imageProduct": "ádadsadsad",
@@ -27,17 +27,26 @@
         "M",
         "XL"
       ]
+    },
+    {
+      "id": "4f93",
+      "nameProduct": "Nguyễn Văn ",
+      "imageProduct": "1",
+      "descriptionProduct": "1",
+      "colorProduct": "1",
+      "quannityProduct": "1",
+      "sizeProduct": "1"
     }
   ],
   "Categories": [
     {
-      "id": 1,
+      "id": "1",
       "nameCategories": "Áo thun"
     }
   ],
   "Cart": [
     {
-      "id": 1,
+      "id": "1",
       "idProduct": 1,
       "idUser": 1,
       "quantityCart": 1,
@@ -47,7 +56,7 @@
   ],
   "Order": [
     {
-      "id": 1,
+      "id": "1",
       "idUser": 1,
       "dateOrder": "11-04-2003",
       "statusOrder": "Đang xác nhận"
@@ -55,7 +64,7 @@
   ],
   "orderDetails": [
     {
-      "id": 1,
+      "id": "1",
       "idOrder": 1,
       "idProduct": 1,
       "quantityOrder": 2,
@@ -65,7 +74,7 @@
   ],
   "Admin": [
     {
-      "id": 1,
+      "id": "1",
       "nameAdmin": "thuan",
       "passwordAdmin": "thuan123"
     }
