@@ -1,4 +1,5 @@
 import { changeApi } from "/main/changApi.js";
+import { startSession,getSession,endSession } from "/main/changSession.js";
 function start() {
     animation_login_signup()
     sign_Up()
@@ -50,11 +51,11 @@ function sign_Up() {
                         changeApi('User', 'GET', null, (Courses) => {
                             var id = 0
                             Courses.forEach(value => {
-                                id = value.id
+                                id = parseInt(value.id)
                             })
                             id++
                             var data = {
-                                id: id,
+                                id: id.toString(),
                                 nameUser: '',
                                 emailUser: Email,
                                 passwordUser: Password,
@@ -87,34 +88,29 @@ function Login() {
             if (!validateEmail(Email)) {
                 error('errorEmail_login', email_Value, 'Email của bạn phải có @gmail.com', 'Email chưa được đăng ký')
             } else {
-                var emailIs = true
                 changeApi('User', 'GET', null, Courses => {
-                    Courses.forEach(value => {
-                        if (Email !== value.emailUser) {
-                            emailIs = false
-                        }
-                    })
-                    if (emailIs == false) {
-                        error('errorEmail_login', email_Value, 'Email chưa được đăng ký', 'Email chưa được đăng ký')
-                    } else {
-                        if (Password == '') {
-                            error('errorPassword_login', password_Value, 'Vui lòng nhập mật khẩu', 'Mật khẩu không chính xác')
-                        } else {
-                            var passwordIs = true
-                            changeApi('User', 'GET', null, Courses => {
-                                Courses.forEach(value => {
-                                    if (Password !== value.passwordUser) {
-                                        passwordIs = false
-                                    }
-                                })
-                                if (passwordIs == false) {
-                                    error('errorPassword_login', password_Value, 'Mật khẩu không chính xác', 'Mật khẩu không chính xác')
-                                    return
-                                } else {
+                    var emailIs = false
+                    for (var i = 0; i < Courses.length; i++) {
+                        if (Email == Courses[i].emailUser) {
+                            emailIs = true
+                            if (Password == '') {
+                                error('errorPassword_login', password_Value, 'Vui lòng nhập mật khẩu', 'Mật khẩu không chính xác')
+                            } else {
+                                if (Password == Courses[i].passwordUser) {
                                     alert("đăng nhập thành công")
+                                    startSession(Courses[i].id)
+                                    window.location.href = '/index.html'
+                                    console.log(getSession())
+                                } else {
+                                    error('errorPassword_login', password_Value, 'Mật khẩu không chính xác', 'Mật khẩu không chính xác')
                                 }
-                            })
+                            }
+                            break
                         }
+                    }
+                    if (!emailIs) {
+                        console.log('Email chưa được đăng ký')
+                        error('errorEmail_login', email_Value, 'Email chưa được đăng ký', 'Email chưa được đăng ký')
                     }
                 })
 

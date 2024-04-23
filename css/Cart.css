@@ -109,29 +109,15 @@ main {
     font-size: 20px;
     margin: 0;
 }
-
-.product-select-size {
-    margin-top: 10px;
+.product-color-size{
+    margin-top: 3px;
+    display: flex;
+    align-items: center;
 }
-
-.product-select-size select {
-    width: 60px;
-    height: 30px;
-    border-radius: 10px;
-    outline: none;
+.product-color-size p{
+    font-size: 15px;
+    color: rgb(177, 177, 177);
 }
-
-.product-select-color {
-    margin-top: 5px;
-}
-
-.product-select-color select {
-    width: 60px;
-    height: 30px;
-    border-radius: 10px;
-    outline: none;
-}
-
 .price-quantity {
     display: flex;
     gap: 10px;

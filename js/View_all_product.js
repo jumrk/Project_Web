@@ -21,6 +21,8 @@ function Getquery() {
         setContentView('Áo sweater')
     } if (paramValue == 'trousers') {
         setContentView('Quần')
+    } if (paramValue == 'clothing') {
+        setContentView('Áo')
     }
 }
 function setContentView(title) {

@@ -111,6 +111,21 @@ body {
 .select-size input {
     display: none;
 }
+.select-color {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.select-color label {
+    width: 30px;
+    height: 30px;
+    border: 1px solid silver;
+    border-radius: 10px;
+}
+.select-color input {
+    display: none;
+}
 
 .select-quantity-button-cart {
     margin-top: 20px;

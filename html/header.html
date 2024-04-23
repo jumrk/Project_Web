@@ -5,18 +5,6 @@
 <header>
     <!-- start header -->
     <div class="header">
-        <div class="header-information">
-            <div class="notice-freeShip">
-                <div>
-                    <ion-icon name="gift-outline"></ion-icon>
-                </div>
-                <div>
-                    <p>
-                        Miễn phí vận chuyển cho đơn hàng trên 500.000₫
-                    </p>
-                </div>
-            </div>
-        </div>
         <div class="header-event-active">
             <div class="header-event">
                 <div class="header-event-menu">
@@ -66,13 +54,13 @@
                 </div>
                 <div class="header-event-user">
                     <div>
-                        <ion-icon onclick="Open_search()" name="search-outline"></ion-icon>
+                        <ion-icon id="open-search" name="search-outline"></ion-icon>
                     </div>
                     <div>
-                        <a href="/html/Cart.html"><ion-icon name="cart-outline"></ion-icon></a>
+                        <a id="cart-event"><ion-icon name="cart-outline"></ion-icon></a>
                     </div>
                     <div>
-                        <a href="/html/Login.html"><ion-icon name="person-outline"></ion-icon></a>
+                        <a id="person-event"><ion-icon name="person-outline"></ion-icon></a>
                     </div>
                 </div>
             </div>
@@ -82,9 +70,9 @@
                     <input type="text" name="" placeholder="Tìm kiếm" id="#">
                     <ion-icon onclick="" name="search-outline"></ion-icon>
                 </div>
-                <ion-icon onclick="Close_search()" name="close-outline"></ion-icon>
+                <ion-icon id="close_search" name="close-outline"></ion-icon>
             </div>
         </div>
     </div>
 </header>
-<script src="/js/header.js"></script>
+<script type="module" src="/js/header.js"></script>

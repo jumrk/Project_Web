@@ -1,7 +1,12 @@
+import { startSession, getSession, endSession } from "/main/changSession.js";
 function start() {
     show_menu()
     loader()
     event_menu()
+    event_person()
+    Open_search()
+    Close_search()
+    event_cart()
 }
 start()
 
@@ -29,12 +34,20 @@ function show_menu() {
     })
 }
 function Close_search() {
-    var header_search = document.getElementById("header-search")
-    header_search.style.height = '0'
+    var btn_close = document.getElementById('close_search')
+    btn_close.addEventListener('click',()=>{
+        var header_search = document.getElementById("header-search")
+        header_search.style.height = '0'
+    })
+   
 }
 function Open_search() {
-    var header_search = document.getElementById("header-search")
-    header_search.style.height = '100%'
+    var btn_open = document.getElementById('open-search')
+    btn_open.addEventListener('click', () => {
+        var header_search = document.getElementById("header-search")
+        header_search.style.height = '100%'
+    })
+
 }
 function loader() {
     document.addEventListener('DOMContentLoaded', function () {
@@ -69,5 +82,25 @@ function event_menu_home() {
     var all_product = document.getElementById("home")
     all_product.addEventListener('click', () => {
         window.location.href = '/index.html'
+    })
+}
+function event_person() {
+    var person_id = document.getElementById('person-event')
+    person_id.addEventListener('click', () => {
+        if (getSession() == null) {
+            window.location.href = '/html/Login.html'
+        } else {
+            window.location.href = '/html/User.html'
+        }
+    })
+}
+function event_cart(){
+    var cart_id = document.getElementById('cart-event')
+    cart_id.addEventListener('click',()=>{
+        if (getSession() == null) {
+            window.location.href = '/html/Login.html'
+        } else {
+            window.location.href = '/html/Cart.html'
+        }
     })
 }
