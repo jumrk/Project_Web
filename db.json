@@ -1,0 +1,199 @@
+{
+  "User": [
+    {
+      "id": "1",
+      "nameUser": " Nguyễn Văn Thuận",
+      "emailUser": "Jumrk03@gmail.com",
+      "passwordUser": "thuan123",
+      "phoneUser": "0373532273"
+    },
+    {
+      "id": "2",
+      "nameUser": "",
+      "emailUser": "1@gmail.com",
+      "passwordUser": "1",
+      "phoneUser": ""
+    },
+    {
+      "id": "3",
+      "nameUser": " Nguyễn Văn Thuận",
+      "emailUser": "iamjumr03@gmail.com",
+      "passwordUser": "1",
+      "phoneUser": "0373532273"
+    },
+    {
+      "id": "4",
+      "nameUser": " Nguyễn Văn Thuận",
+      "emailUser": "12@gmail.com",
+      "passwordUser": "12",
+      "phoneUser": "0373532273"
+    }
+  ],
+  "Address_user": [
+    {
+      "id": "1",
+      "idUser": "1",
+      "Name": "Nguyễn Văn Thuận",
+      "address": "Quảng Nam"
+    },
+    {
+      "id": "4",
+      "idUser": "4",
+      "Name": "Nguyễn Văn Thuận",
+      "address": "q"
+    }
+  ],
+  "Product": [
+    {
+      "id": "1",
+      "nameProduct": "Levents® Classic Sweater/ Black",
+      "idCategories": "4",
+      "imageProduct": "https://levents.asia/cdn/shop/files/CLASSICSWEATER-MT.jpg?v=1703487601&width=713",
+      "descriptionProduct": "Áo sweater oversize có độ dài phủ quá mông,phần tay áo rộng rãi, phần tay áo rộng rãi, form dáng thoải mái, thoáng mát khi mặc.",
+      "priceProduct": 450,
+      "quantityProduct": 10,
+      "colorProduct": [
+        "black"
+      ],
+      "sizeProduct": [
+        "S",
+        "M",
+        "XL"
+      ]
+    },
+    {
+      "id": "2",
+      "nameProduct": "Levents® Flowers Window Tee/ Cream",
+      "idCategories": "1",
+      "imageProduct": "https://levents.asia/cdn/shop/files/Cream_LTSOVCOA427UC0100SS24_1.jpg?v=1711360838&width=713",
+      "descriptionProduct": "Áo oversize có độ dài phủ qua mông, phần tay áo rộng rãi, dài tay áo chạm khuỷu tay người mặc, form dáng thoải mái, rộng rãi khi mặc.",
+      "priceProduct": 130,
+      "quantityProduct": 10,
+      "colorProduct": [
+        "white",
+        "black"
+      ],
+      "sizeProduct": [
+        "S",
+        "M",
+        "XL"
+      ]
+    },
+    {
+      "id": "3",
+      "nameProduct": "Levents® Classic Oversized Polo/ Cream",
+      "idCategories": "2",
+      "imageProduct": "https://levents.asia/cdn/shop/files/MT_018dc3ea-d3d6-4b9f-9d78-99b085b93f38.jpg?v=1705381031&width=713",
+      "descriptionProduct": "Áo sơ mi form oversize với độ dài phủ qua mông, rộng rãi, tôn dáng nhưng vẫn rất thoải mái khi mặc.",
+      "priceProduct": 230,
+      "quantityProduct": 10,
+      "colorProduct": [
+        "white",
+        "black"
+      ],
+      "sizeProduct": [
+        "S",
+        "M",
+        "XL"
+      ]
+    },
+    {
+      "id": "4",
+      "nameProduct": "Levents® Cargo ShortPants/ Dark Green",
+      "idCategories": "3",
+      "imageProduct": "https://levents.asia/cdn/shop/files/DarkGreen_LSPSPCOO231UG0201SS24_1.jpg?v=1712306941&width=713",
+      "descriptionProduct": "Form shortpants dáng suông thẳng vừa, không quá ôm, không quá rộng mà vẫn đảm bảo mang đến sự thuận tiện và thoải mái cho hoạt động của người mặc một cách tốt nhất.",
+      "priceProduct": 230,
+      "quantityProduct": 20,
+      "colorProduct": [
+        "blue"
+      ],
+      "sizeProduct": [
+        "S",
+        "M",
+        "XL"
+      ]
+    },
+    {
+      "id": "5",
+      "nameProduct": "Levents® Cargo SweatPants/ Dark Green",
+      "idCategories": "3",
+      "imageProduct": "https://levents.asia/cdn/shop/files/DarkGreen_LPASTCON232UG0202SS24_1.jpg?v=1712318357&width=713",
+      "descriptionProduct": "Form SweatPants suông thẳng, không quá ôm, không quá rộng mà vẫn đảm bảo mang đến sự thuận tiện và thoải mái cho hoạt động của người mặc một cách tốt nhất.",
+      "priceProduct": 460,
+      "quantityProduct": 30,
+      "colorProduct": [
+        "blue",
+        "black"
+      ],
+      "sizeProduct": [
+        "S",
+        "M",
+        "XL"
+      ]
+    }
+  ],
+  "Categories": [
+    {
+      "id": "1",
+      "nameCategories": "Áo thun"
+    },
+    {
+      "id": "2",
+      "nameCategories": "Áo Polo"
+    },
+    {
+      "id": "3",
+      "nameCategories": "Quần"
+    },
+    {
+      "id": "4",
+      "nameCategories": "sweater"
+    }
+  ],
+  "Cart": [
+    {
+      "id": "4",
+      "idProduct": "3",
+      "idUser": "1",
+      "quantityCart": 4,
+      "sizeCart": "XL",
+      "colorCart": "black"
+    },
+    {
+      "id": "5",
+      "idProduct": "1",
+      "idUser": "1",
+      "quantityCart": "1",
+      "sizeCart": "M",
+      "colorCart": "black"
+    }
+  ],
+  "Order": [
+    {
+      "id": "1",
+      "idUser": "1",
+      "dateOrder": "11-04-2003",
+      "statusOrder": "Đang xác nhận",
+      "statusPayment": "Chưa thanh toán",
+      "total": "500.000"
+    }
+  ],
+  "orderDetails": [
+    {
+      "id": "1",
+      "idOrder": 1,
+      "idProduct": 1,
+      "quantityOrder": 2,
+      "colorOrder": "blue",
+      "sizeOrder": "S"
+    }
+  ],
+  "Admin": [
+    {
+      "id": "1",
+      "nameAdmin": "thuan",
+      "passwordAdmin": "thuan123"
+    }
+  ]
+}

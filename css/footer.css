@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+* {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+footer {
+    width: 100%;
+    height: 350px;
+    background-color: black;
+    color: white;
+}
+
+.footer {
+    padding: 20px;
+}
+
+.content-footer {
+    display: flex;
+    justify-content: space-around;
+}
+
+.contact div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.contact div ion-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.contact div p {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.menu-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.menu-footer b {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.menu-footer a {
+    font-size: 20px;
+    font-weight: 300;
+    color: white;
+    text-decoration: none;
+}
+.menu-footer a:hover {
+    text-decoration: underline;
+}
+.contact-icon-footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.contact-icon-footer a {
+    color: white;
+    border: 2px solid;
+    border-radius: 15px;
+}
+
+.contact-icon-footer a i {
+    display: inline-flex;
+    justify-content: center;
+    padding: 10px;
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
+}
+
+.contact-icon-footer a:nth-child(1) {
+    transition: all ease 0.5s;
+}
+
+.contact-icon-footer a:nth-child(1):hover {
+    background-color: rgb(1, 101, 225);
+    color: white;
+}
+
+.contact-icon-footer a:nth-child(2):hover {
+    background-image: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45);
+    ;
+}
+
+.contact-icon-footer a:nth-child(3) {
+    transition: all ease 0.5s;
+}
+
+.contact-icon-footer a:nth-child(3):hover {
+    border-radius: 50%;
+}
+
+.contact-icon-footer a:nth-child(4) {
+    transition: all ease 0.5s;
+}
+
+.contact-icon-footer a:nth-child(4):hover {
+    border-radius: 50%;
+    background-color: white;
+    color: black;
+}

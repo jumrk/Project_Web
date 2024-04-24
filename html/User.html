@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/User.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>Người dùng</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="header" id="header">
+
+    </div>
+    <main>
+        <div class="form-edit-user" id="form-edit-address">
+            <div class="content-form-user">
+                <ion-icon id="close-form-edit-address" name="close-outline"></ion-icon>
+                <p>Địa chỉ</p>
+                <div class="ground-input-user">
+                    <label for="Name-edit">Họ và tên:</label>
+                    <input type="text" id="Name-edit">
+                </div>
+                <div class="ground-input-user">
+                    <label for="address-edit">Địa chỉ</label>
+                    <input type="text" id="address-edit" placeholder="Thôn/ấp, phường/xã, huyện/quận, tỉnh/thành phố">
+                </div>
+                <div class="ground-button">
+                    <button id="btn-edit-address">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-edit-user" id="form-address">
+            <div class="content-form-user">
+                <ion-icon id="close-form-address" name="close-outline"></ion-icon>
+                <p>Địa chỉ</p>
+                <div class="ground-input-user">
+                    <label for="Name">Họ và tên:</label>
+                    <input type="text" id="Name">
+                </div>
+                <div class="ground-input-user">
+                    <label for="address">Địa chỉ</label>
+                    <input type="text" id="address" placeholder="Thôn/ấp, phường/xã, huyện/quận, tỉnh/thành phố">
+                </div>
+                <div class="ground-button">
+                    <button id="btn-add-address">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-edit-user" id="form-edit-user">
+            <div class="content-form-user">
+                <ion-icon id="close-form" name="close-outline"></ion-icon>
+                <p>Chỉnh sửa thông tin</p>
+                <div class="ground-input-user">
+                    <label for="userName">Tên tài khoản:</label>
+                    <input type="text" id="userName">
+                </div>
+                <div class="ground-input-user">
+                    <label for="userEmail">Email:</label>
+                    <input type="email" id="userEmail">
+                </div>
+                <div class="ground-input-user">
+                    <label for="userPhone">Số điện thoại:</label>
+                    <input type="text" id="userPhone">
+                </div>
+                <div class="ground-button">
+                    <button id="btn-edit-user">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+        <div class="title-user">
+            <a href="/index.html">Trang chủ</a>
+            <p>/Tài khoản</p>
+        </div>
+        <div class="user">
+            <div class="nav-user">
+                <h3>TRANG TÀI KHOẢN</h3>
+                <span><b>Xin chào,</b>
+                    <p id="nav-show-name"></p>!
+                </span>
+                <div class="nav">
+                    <p id="information-user">Thông tin tài khoản</p>
+                    <p id="address-user">Địa chỉ</p>
+                    <p id="Logout">Đăng xuất</p>
+                </div>
+            </div>
+            <div class="content-user">
+                <div class="information-user" id="view-information">
+                    <div class="title-information-user">
+                        <h3>TÀI KHOẢN</h3>
+                    </div>
+                    <div class="content-information-user">
+                        <p>Tên tài khoản: <b id="content-name-show"></b>!</p>
+                        <div class="information-user-address">
+                            <ion-icon name="mail-outline"></ion-icon>
+                            <p>Email: <span id="content-email-show"></span></p>
+                        </div>
+                        <div class="information-user-phone">
+                            <ion-icon name="call-outline"></ion-icon>
+                            <p>Điện thoại: <span id="content-phone-show"></span></p>
+                        </div>
+                        <div class="btn-edit-user">
+                            <button id="btn-show-form">Chỉnh sửa</button>
+                        </div>
+                        <div class="information-user-order">
+                            <div class="title-user-order">
+                                <h3>ĐƠN HÀNG CỦA BẠN</h3>
+                            </div>
+                            <div class="content-user-order">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Mã đơn hàng</th>
+                                            <th>Ngày đặt</th>
+                                            <th>Thành tiền</th>
+                                            <th>Tình trạng thanh toán</th>
+                                            <th>Tình trạng đơn hàng</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="content-order-show">
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="information-address" id="view-address">
+                    <div class="title-information-address">
+                        <h3>ĐỊA CHỈ CỦA BẠN</h3>
+                        <button id="add-address">Thêm địa chỉ</button>
+                    </div>
+                    <div class="content-information-address" id="show-address">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="footerView" id="footer">
+
+    </div>
+    <script type="module" src="/js/User.js"></script>
+</body>
+
+</html>

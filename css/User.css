@@ -1,0 +1,309 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.form-edit-user {
+    position: fixed;
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    transform: translateY(-200%);
+    transition: transform ease 0.5s;
+
+}
+
+.content-form-user {
+    padding: 20px;
+    width: 40%;
+    height: auto;
+    background-color: white;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+}
+
+.content-form-user p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.content-form-user ion-icon {
+    font-size: 20px;
+    border: 1px solid silver;
+    border-radius: 50%;
+    cursor: pointer;
+    color: silver;
+}
+
+.ground-input-user {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-bottom: 10px;
+}
+
+.ground-input-user label {
+    font-size: 16px;
+}
+
+.ground-input-user input {
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid silver;
+    outline: none;
+}
+
+.ground-button {
+    margin-top: 10px;
+    display: flex;
+    justify-content: end;
+}
+
+.ground-button button {
+    height: 40px;
+    width: 130px;
+    border: none;
+    border-radius: 8px;
+    background-color: black;
+    cursor: pointer;
+    color: white;
+    font-weight: 500;
+}
+
+.items-event-menu {
+    position: fixed;
+    transform: translateX(-100%);
+    overflow: hidden;
+    transition: transform ease-in-out 0.5s;
+    background-color: rgb(254, 254, 254);
+    height: 100%;
+    top: 0;
+    width: 300px;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.title-user {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    padding-top: 20px;
+    font-size: 18px;
+}
+
+.title-user a {
+    text-decoration: none;
+    color: black;
+}
+
+.title-user a:hover {
+    text-decoration: underline;
+}
+
+.user {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.nav-user {
+    width: 30%;
+    padding-left: 50px;
+}
+
+.nav-user h3 {
+    font-weight: 400;
+}
+
+.nav-user span {
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+}
+
+.nav-user span b {
+    font-weight: 400;
+}
+
+.nav-user span p {
+    color: blue;
+    font-weight: 400;
+}
+
+.nav p {
+    cursor: pointer;
+}
+
+.nav p:hover {
+    text-decoration: underline;
+}
+
+.content-user {
+    position: relative;
+    width: 60%;
+    margin-bottom: 50px;
+    height: 100%;
+    overflow: hidden;
+}
+
+.information-user {
+    width: 100%;
+    opacity: 1;
+    height: 100%;
+    transform: translateX(0);
+    transition: transform ease 0.5s;
+    overflow-y: auto;
+}
+
+.title-information-user h3 {
+    font-weight: 400;
+}
+
+.content-information-user {
+    width: 100%;
+    height: 100%;
+}
+
+.content-information-user b {
+    font-weight: 400;
+}
+
+.information-user-address {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.information-user-address p span {
+    font-weight: 400;
+}
+
+.information-user-address ion-icon {
+    font-weight: 400;
+    color: blue;
+}
+
+.information-user-phone {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.information-user-phone ion-icon {
+    font-weight: 400;
+    color: blue;
+}
+
+.information-user-phone p span {
+    font-weight: 400;
+}
+
+.btn-edit-user button {
+    border: none;
+    height: 30px;
+    color: white;
+    font-weight: bold;
+    background-color: black;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.information-user-order {
+    width: 100%;
+    height: 100%;
+}
+
+.title-user-order h3 {
+    font-weight: 400;
+}
+
+.content-user-order {
+    height: auto;
+}
+
+.content-user-order table {
+    width: 100%;
+    height: 100%;
+    text-align: start;
+    border-collapse: collapse;
+}
+
+.content-user-order table th {
+    height: 40px;
+    border-bottom: 1px solid silver;
+    border-top: 1px solid silver;
+    font-weight: 400;
+}
+
+.content-user-order table td {
+    text-align: center;
+    border-bottom: 1px solid silver;
+    width: 30px;
+}
+
+#id-order {
+    cursor: pointer;
+    position: relative;
+}
+
+#id-order:hover {
+    text-decoration: underline;
+}
+
+.information-address {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: transform ease 0.5s;
+}
+
+.title-information-address h3 {
+    font-weight: 400;
+}
+
+.title-information-address button {
+    width: 150px;
+    height: 40px;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    border: none;
+    font-weight: 400;
+    transition: transform ease 0.5s;
+}
+
+.title-information-address button:hover {
+    transform: scale(1.02);
+}
+
+.container-address {
+    display: flex;
+    justify-content: space-between;
+}
+
+.container-view p span {
+    font-weight: 400;
+}
+
+.container-action {
+    display: flex;
+    gap: 50px;
+    cursor: pointer;
+}
+
+.container-action p:hover {
+    text-decoration: underline;
+}
