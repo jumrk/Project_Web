@@ -20,6 +20,13 @@
       "emailUser": "iamjumr03@gmail.com",
       "passwordUser": "1",
       "phoneUser": "0373532273"
+    },
+    {
+      "id": "4",
+      "nameUser": " Nguyễn Văn Thuận",
+      "emailUser": "12@gmail.com",
+      "passwordUser": "12",
+      "phoneUser": "0373532273"
     }
   ],
   "Address_user": [
@@ -28,13 +35,19 @@
       "idUser": "1",
       "Name": "Nguyễn Văn Thuận",
       "address": "Quảng Nam"
+    },
+    {
+      "id": "4",
+      "idUser": "4",
+      "Name": "Nguyễn Văn Thuận",
+      "address": "q"
     }
   ],
   "Product": [
     {
       "id": "1",
       "nameProduct": "Levents® Classic Sweater/ Black",
-      "idCategories": "1",
+      "idCategories": "4",
       "imageProduct": "https://levents.asia/cdn/shop/files/CLASSICSWEATER-MT.jpg?v=1703487601&width=713",
       "descriptionProduct": "Áo sweater oversize có độ dài phủ quá mông,phần tay áo rộng rãi, phần tay áo rộng rãi, form dáng thoải mái, thoáng mát khi mặc.",
       "priceProduct": 450,
@@ -140,16 +153,16 @@
   ],
   "Cart": [
     {
-      "id": "1",
-      "idProduct": "1",
+      "id": "4",
+      "idProduct": "3",
       "idUser": "1",
-      "quantityCart": 1,
-      "sizeCart": "S",
-      "colorCart": "blue"
+      "quantityCart": 3,
+      "sizeCart": "XL",
+      "colorCart": "black"
     },
     {
-      "id": "2",
-      "idProduct": "3",
+      "id": "5",
+      "idProduct": "1",
       "idUser": "1",
       "quantityCart": "1",
       "sizeCart": "M",

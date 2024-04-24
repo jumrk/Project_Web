@@ -109,15 +109,18 @@ main {
     font-size: 20px;
     margin: 0;
 }
-.product-color-size{
+
+.product-color-size {
     margin-top: 3px;
     display: flex;
     align-items: center;
 }
-.product-color-size p{
+
+.product-color-size p {
     font-size: 15px;
     color: rgb(177, 177, 177);
 }
+
 .price-quantity {
     display: flex;
     gap: 10px;

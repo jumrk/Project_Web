@@ -52,7 +52,7 @@ function btn_introduce() {
     event_introduce_AllProduct(box_2, 'trousers')
 }
 function event_introduce_AllProduct(link, condition) {
-    link.addEventListener('click', (event) => {
+    link.addEventListener('click', () => {
         var param = '?param=' + condition
         window.location.href = '/html/View_all_product.html' + param
     })
@@ -65,12 +65,13 @@ function render_product_new() {
             if (a > 4) {
                 break
             }
+            var formatted = Courese[i].priceProduct.toLocaleString('vi-VN',{minimumFractionDigits: 0})
             html += `<div class="card" id="${Courese[i].id}">
             <img src="${Courese[i].imageProduct}" alt="">
             <p>${Courese[i].nameProduct}</p>
             <div class="Color" id='Color-span'>
             </div>
-            <b>${Courese[i].priceProduct}</b>
+            <b>${formatted}.000VND</b>
         </div>`
             a++
         }
@@ -79,8 +80,6 @@ function render_product_new() {
         document.getElementById('show-product-new').innerHTML = html
         click_product()
         show_color_product()
-        // var id = document.getElementById('span-id')
-        // id.style.backgroundColor = 'black'
     })
 
 }

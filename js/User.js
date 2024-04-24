@@ -167,7 +167,7 @@ function add_address() {
     var address = document.getElementById('address')
     var btn_add = document.getElementById('btn-add-address')
     show_form('add-address', 'form-address', 'close-form-address')
-    btn_add.addEventListener('click', Courese => {
+    btn_add.addEventListener('click', () => {
         let id = 0
         changeApi('Address_user', 'GET', null, Courese => {
             Courese.forEach(element => {

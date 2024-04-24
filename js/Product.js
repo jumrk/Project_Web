@@ -1,9 +1,8 @@
 import { changeApi } from "/main/changApi.js";
-import {getSession} from "/main/changSession.js";
+import { getSession } from "/main/changSession.js";
 function start() {
     loadHeaderfooter()
     render_product()
-    add_cart()
 }
 start()
 
@@ -16,9 +15,10 @@ function render_product() {
     changeApi('Product', 'GET', null, (Courese) => {
         Courese.forEach(elm => {
             if (elm.id == id) {
+                var formatted = elm.priceProduct.toLocaleString('vi-VN', { minimumFractionDigits: 0 })
                 view_img.src = elm.imageProduct
                 view_name.innerHTML = elm.nameProduct
-                view_price.innerHTML = elm.priceProduct
+                view_price.innerHTML = formatted + '.000'
                 view_description.innerHTML = elm.descriptionProduct
             }
         })
@@ -27,6 +27,7 @@ function render_product() {
         render_color(id)
         plus()
         minus()
+        add_cart()
     })
 }
 function getParamid() {
@@ -101,6 +102,7 @@ function minus() {
     btn.addEventListener('click', () => {
         if (number.value <= 1) {
             number.value = 1
+            console.log(number.value)
         } else {
             number.value--
         }
@@ -111,6 +113,7 @@ function plus() {
     var btn = document.getElementById('plus')
     btn.addEventListener('click', () => {
         value_number.value++
+        console.log(value_number.value)
     })
 }
 function show_descript_product() {
@@ -130,22 +133,24 @@ function show_descript_product() {
 function add_cart() {
     var btn_add = document.getElementById('Add_cart')
     var idProduct = getParamid()
-    var quantity = document.getElementById('value-number').value
+    var quantity = document.getElementById('value-number')
     var size = document.getElementById('result-size')
     var color = document.getElementById('result-color')
 
     btn_add.addEventListener('click', () => {
-        if(getSession() == null){
+        var quantity_value = quantity.value
+        console.log(quantity_value)
+        if (getSession() == null) {
             alert('Vui lòng đăng nhập')
-        }else{
+        } else {
             var size_value = size.innerText
             var color_value = color.innerText
             var id = 0
-            if(size_value == ''){
+            if (size_value == '') {
                 alert('Vui lòng chọn size sản phẩm')
-            }else if(color_value == ''){
+            } else if (color_value == '') {
                 alert('Vui lòng chọn màu sản phẩm')
-            }else{
+            } else {
                 changeApi('Cart', 'GET', null, Courese => {
                     Courese.forEach(elm => {
                         id = elm.id
@@ -155,12 +160,12 @@ function add_cart() {
                         id: id.toString(),
                         idProduct: idProduct,
                         idUser: getSession(),
-                        quantityCart: quantity,
+                        quantityCart: quantity_value,
                         sizeCart: size_value,
                         colorCart: color_value
                     }
                     console.log(data)
-                    changeApi('Cart',"POST",data,()=>{
+                    changeApi('Cart', "POST", data, () => {
                         alert('Thêm vào giỏ hành thành công')
                     })
                 })

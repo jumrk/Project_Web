@@ -36,14 +36,15 @@ function renderCart() {
                     <div class="price-quantity">
                         <p>${formattedTotal}.000VND</p>
                         <div class="quantity">
-                            <button>-</button>
+                            <button class="Minus" id="${element.id}">-</button>
                             <span>${element.quantityCart}</span>
-                            <button>+</button>
+                            <button class="Plus" id="${element.id}">+</button>
                         </div>
                     </div>
                 </div>`
                     document.getElementById('show-cart').innerHTML = html
                     Delete()
+                    Minus_Plus()
                 })
             }
         });
@@ -58,12 +59,62 @@ function renderProduct(id, callback) {
         })
     })
 }
-function Delete(){
-    var class_list = document.querySelectorAll('.delete_list')
-    class_list.forEach(elm=>{
-        elm.addEventListener('click',()=>{
+function Minus_Plus() {
+    var Minus_list = document.querySelectorAll('.Minus')
+    var Plus_list = document.querySelectorAll('.Plus')
+    Minus_list.forEach(elm => {
+        elm.addEventListener('click', () => {
             var id = elm.getAttribute('id')
-            changeApi('Cart/'+id,'DELETE',null,()=>{
+            changeApi('Cart', 'GET', null, (Courese) => {
+                Courese.forEach(elm => {
+                    if (elm.id == id) {
+                        var quantityCart = parseInt(elm.quantityCart)
+                        if (quantityCart > 1) {
+                            var quantity = quantityCart -= 1
+                            var data = {
+                                id: elm.id,
+                                idProduct: elm.idProduct,
+                                idUser: getSession(),
+                                quantityCart: quantity,
+                                sizeCart: elm.sizeCart,
+                                colorCart: elm.colorCart
+                            }
+                            changeApi("Cart/" + id, "PUT", data, renderCart)
+                        }
+                    }
+                })
+            })
+        })
+    })
+    Plus_list.forEach(elm => {
+        elm.addEventListener('click', () => {
+            var id = elm.getAttribute('id')
+            changeApi('Cart', 'GET', null, (Courese) => {
+                Courese.forEach(elm => {
+                    if (elm.id == id) {
+                        var quantityCart = parseInt(elm.quantityCart)
+                        var quantity = quantityCart += 1
+                        var data = {
+                            id: elm.id,
+                            idProduct: elm.idProduct,
+                            idUser: getSession(),
+                            quantityCart: quantity,
+                            sizeCart: elm.sizeCart,
+                            colorCart: elm.colorCart
+                        }
+                        changeApi("Cart/" + id, "PUT", data, renderCart)
+                    }
+                })
+            })
+        })
+    })
+}
+function Delete() {
+    var class_list = document.querySelectorAll('.delete_list')
+    class_list.forEach(elm => {
+        elm.addEventListener('click', () => {
+            var id = elm.getAttribute('id')
+            changeApi('Cart/' + id, 'DELETE', null, () => {
                 alert('xóa thành công')
                 renderCart()
             })
