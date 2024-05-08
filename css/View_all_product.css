@@ -5,6 +5,11 @@
     font-weight: 300;
     font-style: normal;
 }
+
+main {
+    min-height: 100vh;
+}
+
 .items-event-menu {
     position: fixed;
     transform: translateX(-100%);
@@ -15,18 +20,21 @@
     top: 0;
     width: 300px;
 }
+
 .title_view_all_product span {
     display: flex;
     align-items: center;
     font-size: 17px;
 }
+
 .title_view_all_product span a {
-   text-decoration: none;
-   color: black;
+    text-decoration: none;
+    color: black;
 }
+
 .title_view_all_product span a:hover {
     text-decoration: underline;
- }
+}
 
 .content_view_all_product {
     display: flex;

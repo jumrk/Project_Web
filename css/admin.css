@@ -1,41 +1,229 @@
-*{
+* {
     margin: 0;
     padding: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.head{
-    background-color: dimgrey;
-    padding: 3px 0;
+body {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #F2F2F2;
+}
+#order{
+    display: block;
+}
+nav {
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+    width: 20%;
+    background-color: #6c60F3;
+    border-radius: 0px 40px 0px 0px;
+    min-height: 100vh;
 }
 
-.head a{
+.title-nav {
+    height: 20%;
+    font-size: 30px;
+    font-weight: bold;
     color: white;
+    width: 100%;
+    text-align: center;
 }
 
-.user button{
+.content-nav {
+    height: 80%;
+}
+
+.list-menu ul {
+    height: 100%;
+    width: 100%;
+}
+
+.list-menu ul li {
+    display: flex;
+    padding-left: 20px;
+    align-items: center;
+    gap: 5px;
+    height: 70px;
+    list-style: none;
+    font-size: 20px;
+    color: white;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.list-menu ul li ion-icon {
+    margin-bottom: 15px;
+}
+
+main {
+    width: 80%;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    margin-left: 30px;
+    background-color: #FFFF;
+    width: 490px;
+    height: 44px;
+    gap: 5px;
+}
+
+.search input {
     border: none;
-    background-color: dimgrey;
+    outline: none;
+    height: 100%;
+    width: 90%;
 }
 
-.mid .mid-left{
-    background-color: rgba(0, 0, 0, 0.296);
+.search ion-icon {
+    width: 10%;
+    font-size: 20px;
+}
+
+.content {
+    padding: 30px 30px 30px 50px;
+}
+
+
+.content-thongke {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.card-thongke {
+    width: 260px;
+    height: 125px;
+    padding: 10px;
+    border-radius: 20px;
+    color: white;
+    position: relative;
+}
+
+.title-card {
+    height: 20%;
+}
+
+.content-card {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.content-card p {
+    margin: 0;
+}
+
+.card-thongke:nth-child(1) {
+    background: linear-gradient(to right, #EE658E, #FFA6B5);
+}
+
+.card-thongke:nth-child(2) {
+    background: linear-gradient(to right, #D4B3FF, #A075EB);
+}
+
+.card-thongke:nth-child(3) {
+    background: linear-gradient(to right, #A2F8B1, #2ABC9C);
+}
+
+.card-thongke:nth-child(4) {
+    background: linear-gradient(to right, #E7B84C, #FCE086);
+}
+
+
+.content-product {
+    margin-top: 30px;
+}
+
+.title-product {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title-product ion-icon {
+    font-size: 30px;
+    padding: 5px;
+    border-radius: 10px;
+    color: silver;
+    border: 1px solid silver;
+    transition: all ease 0.3s;
+    cursor: pointer;
+}
+
+.title-product ion-icon:hover {
+    background-color: black;
     color: white;
 }
 
-.mid-left .row{
-    padding: 0 14px;
+.container {
+    width: 100%;
+    margin: 0 auto;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid #ccc;
 }
 
-#update{
-    border: 1px red solid;
-    color: red;
-    background-color: white;
-    padding: 5px 5px;
+th {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
 }
 
-#deleted{
-    border: 1px yellow solid;
-    color: yellow;
-    background-color: white;
-    padding: 6px 6px;
+td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 130px;
+}
+
+thead {
+    background-color: #f2f2f2;
+}
+
+th {
+    background-color: #ddd;
+}
+
+
+
+td img {
+    width: 100%;
+}
+
+td ion-icon {
+    padding: 5px;
+    border-radius: 5p;
+    font-size: 20px;
+    cursor: pointer;
+}
+.show{
+    display: none;
+}
+.show.active{
+    display: block;
 }

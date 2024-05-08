@@ -1,6 +1,9 @@
 <link rel="stylesheet" href="/css/header.css">
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js"
+    integrity="sha512-PJa3oQSLWRB7wHZ7GQ/g+qyv6r4mbuhmiDb8BjSFZ8NZ2a42oTtAq5n0ucWAwcQDlikAtkub+tPVCw4np27WCg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <header>
     <!-- start header -->
@@ -40,10 +43,10 @@
                                 <p id="trousers">Quần</p>
                             </li>
                             <li>
-                                <p>Về chúng tôi</p>
+                                <p id="aboutUs">Về chúng tôi</p>
                             </li>
                             <li>
-                                <p>Liên hệ</p>
+                                <p id="contact">Liên hệ</p>
                             </li>
                             <p style="text-align: center;">XIN CHÀO©</p>
                         </ul>
@@ -67,10 +70,12 @@
             <!-- Tìm kiếm -->
             <div class="header-search" id="header-search">
                 <div>
-                    <input type="text" name="" placeholder="Tìm kiếm" id="#">
-                    <ion-icon onclick="" name="search-outline"></ion-icon>
+                    <input type="text" name="" placeholder="Tìm kiếm" id="searchInput">
+                    <ion-icon name="search-outline"></ion-icon>
                 </div>
                 <ion-icon id="close_search" name="close-outline"></ion-icon>
+            </div>
+            <div class="search-results" id="searchResults">
             </div>
         </div>
     </div>

@@ -6,11 +6,15 @@ function start() {
     buyNow()
     btn_introduce()
     render_product_new()
+    btn_brand()
 }
 start()
 function loadHeaderfooter() {
     $("#header").load("/html/header.html");
     $("#footer").load("/html/footer.html");
+}
+function loading() {
+    $("body").load("/html/loading.html");
 }
 function animation() {
     var box_content_1 = document.getElementById("box-content-1")
@@ -41,7 +45,10 @@ function isIntoView(elm) {
 function buyNow() {
     var btn = document.getElementById('btn-img-banner')
     btn.addEventListener('click', () => {
-        window.location.href = '/html/View_all_product.html'
+        loading()
+        setTimeout(() => {
+            window.location.href = '/html/View_all_product.html'
+        }, 1000);
     })
 }
 function btn_introduce() {
@@ -54,7 +61,10 @@ function btn_introduce() {
 function event_introduce_AllProduct(link, condition) {
     link.addEventListener('click', () => {
         var param = '?param=' + condition
-        window.location.href = '/html/View_all_product.html' + param
+        loading()
+        setTimeout(() => {
+            window.location.href = '/html/View_all_product.html' + param
+        }, 1000);
     })
 }
 function render_product_new() {
@@ -65,7 +75,7 @@ function render_product_new() {
             if (a > 4) {
                 break
             }
-            var formatted = Courese[i].priceProduct.toLocaleString('vi-VN',{minimumFractionDigits: 0})
+            var formatted = Courese[i].priceProduct.toLocaleString('vi-VN', { minimumFractionDigits: 0 })
             html += `<div class="card" id="${Courese[i].id}">
             <img src="${Courese[i].imageProduct}" alt="">
             <p>${Courese[i].nameProduct}</p>
@@ -106,7 +116,35 @@ function click_product() {
         element.addEventListener('click', () => {
             var id = element.getAttribute('id')
             console.log(id)
-            window.location.href = '/html/Product.html?id=' + id
+            loading()
+            setTimeout(() => {
+                window.location.href = '/html/Product.html?id=' + id
+            }, 1000);
+
         })
+    })
+}
+function btn_brand() {
+    var btn_levent = document.getElementById('btn-levents')
+    var btn_paradox = document.getElementById('btn-paradox')
+    var btn_lunacy = document.getElementById('btn-lunacy')
+    var link = '/html/View_all_product.html?param='
+    btn_levent.addEventListener('click', () => {
+        loading()
+        setTimeout(() => {
+            window.location.href = link + 'levents'
+        }, 1000);
+    })
+    btn_paradox.addEventListener('click', () => {
+        loading()
+        setTimeout(() => {
+            window.location.href = link + 'paradox'
+        }, 1000);
+    })
+    btn_lunacy.addEventListener('click', () => {
+        loading()
+        setTimeout(() => {
+            window.location.href = link + 'lunacy'
+        }, 1000);
     })
 }

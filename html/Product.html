@@ -29,26 +29,24 @@
             <div class="product-info">
                 <h2 id="view_name"></h2>
                 <b><b id="view_price"></b><span>VND</span></b>
+                <b>Brand: <span id="Show-brand"></span></b>
                 <b>Kích thước: <span id="result-size"></span></b>
                 <div class="select-size" id="show-size">
-                    
+
                 </div>
                 <b>Màu: <span id="result-color"></span></b>
                 <div class="select-color" id="show-color">
-                   
+
                 </div>
                 <div class="select-quantity-button-cart">
                     <div class="select-quantity">
                         <button id="minus">-</button>
-                        <input type="number" title="number" name="" id="value-number" value="1" >
+                        <input type="number" title="number" name="" id="value-number" value="1">
                         <button id="plus">+</button>
-                    </div>
-                    <div class="button-cart">
-                        <button id="Add_cart">Thêm vào giỏ hàng</button>
                     </div>
                 </div>
                 <div class="button-pay">
-                    <button>Mua ngay</button>
+                    <button id="Add_cart">Thêm vào giỏ hàng</button>
                 </div>
                 <div class="container-box-suggest">
                     <div class="box-suggest">
@@ -73,7 +71,7 @@
                         <p id="click-descript">Mô tả sản phẩm </p>
                     </div>
                     <div class="content-descript" id="show-descript">
-                      
+
                     </div>
                 </div>
             </div>
@@ -82,47 +80,8 @@
             <div class="title-product-suggest">
                 <h2>Có thể bạn sẽ thích</h2>
             </div>
-            <div class="card-product-suggest">
-                <div class="card" id="card">
-                    <img src="/images/ảnh.png" alt="">
-                    <div class="color-card">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <p>Fashion™ quần dài kaki</p>
-                    <b>370.000 VND</b>
-                </div>
-                <div class="card" id="card">
-                    <img src="/images/ảnh.png" alt="">
-                    <div class="color-card">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <p>Fashion™ quần dài kaki</p>
-                    <b>370.000 VND</b>
-                </div>
-                <div class="card" id="card">
-                    <img src="/images/ảnh.png" alt="">
-                    <div class="color-card">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <p>Fashion™ quần dài kaki</p>
-                    <b>370.000 VND</b>
-                </div>
-                <div class="card" id="card">
-                    <img src="/images/ảnh.png" alt="">
-                    <div class="color-card">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <p>Fashion™ quần dài kaki</p>
-                    <b>370.000 VND</b>
-                </div>
+            <div class="card-product-suggest" id="show-product-new">
+
             </div>
         </div>
     </div>
@@ -130,6 +89,7 @@
 
     </div>
     <script type="module" src="/js/Product.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

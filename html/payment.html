@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/payment.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <title>Thanh toán</title>
+</head>
+
+<body>
+    <nav>
+        <div>
+            <ion-icon id="back" name="arrow-back-outline"></ion-icon>
+        </div>
+    </nav>
+    <main>
+        <div class="container">
+            <div class="content-information-user">
+                <h2>THANH TOÁN</h2>
+                <h4>Thông tin giao hàng</h4>
+                <div class="user">
+                    <div class="icon-user">
+                        <ion-icon name="person-outline"></ion-icon>
+                    </div>
+                    <div class="Email-logout">
+                        <p id="Email-user"></p>
+                        <b id="btn-logout">Đăng xuất</b>
+                    </div>
+                </div>
+                <p>Địa chỉ:</p>
+                <span title="Click để thêm địa chỉ" style="color: red; cursor: pointer; display: none;"
+                    id="add-address">Bạn chưa có địa chỉ</span>
+                <select id="address-select">
+                </select>
+                <div class="input-phone">
+                    <input type="text" id="phone" value="" placeholder="Số điện thoại">
+                </div>
+                <h4 class="h4">Phương thức thanh toán</h4>
+                <div class="product-payment">
+                    <input type="radio" id="procedure-payment">
+                    <label id="radio-checked" for="procedure-payment"></label>
+                    <ion-icon name="card-outline"></ion-icon>
+                    <span>Thanh toán khi nhận hàng</span>
+                </div>
+                <div class="btn-payment">
+                    <button id="btn-payment">Thanh toán</button>
+                </div>
+            </div>
+            <div class="content-information-order">
+                <div class="product-order" id="show-product-order">
+                   
+
+                </div>
+                <hr>
+                <div class="voucher-apply">
+                    <input type="text" id="code-voucher" placeholder="Nhập mã giảm giá của bạn">
+                    <button id="btn-apply-voucher">Áp dụng</button>
+                </div>
+                <hr>
+                <div class="Provisional">
+                    <div>
+                        <p>Tạm tính</p>
+                        <b id="Provisional-value"></b>
+                    </div>
+                    <div>
+                        <p>Phí vận chuyển</p>
+                        <b>50.000VND</b>
+                    </div>
+                </div>
+                <hr>
+                <div class="Total-order">
+                    <p>Tổng cộng</p>
+                    <div class="show-total">
+                        <input type="text" id="total-order">
+                        <b>.000VND</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+<script type="module" src="/js/payment.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</html>

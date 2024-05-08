@@ -15,6 +15,9 @@ function loadHeaderfooter() {
     $("#header").load("/html/header.html");
     $("#footer").load("/html/footer.html");
 }
+function loading() {
+    $("body").load("/html/loading.html");
+}
 function viewInformationAddress() {
     var information = document.getElementById('information-user')
     var address = document.getElementById('address-user')
@@ -50,7 +53,11 @@ function form_edit_user() {
                         return courses.emailUser === userEmail.value && courses.id !== getSession()
                     });
                     if (emailIsDuplicate) {
-                        alert('Email đã tồn tại');
+                        Swal.fire({
+                            title: "Cảnh báo",
+                            text: "Email đã tồn tại",
+                            icon: "error"
+                        });
                     } else {
                         var data = {
                             id: getSession(),
@@ -59,8 +66,16 @@ function form_edit_user() {
                             passwordUser: element.passwordUser,
                             phoneUser: userPhone.value
                         };
-                        changeApi('User' + '/' + getSession(), 'PUT', data, RenderApi);
-                        alert('Chỉnh sửa thành công')
+
+                        Swal.fire({
+                            title: "Thành công",
+                            text: "Chỉnh sửa thành công",
+                            icon: "success"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                changeApi('User' + '/' + getSession(), 'PUT', data, RenderApi);
+                            }
+                        });
                     }
                 });
             }
@@ -114,11 +129,12 @@ function getOrder(id_user) {
         Courses.forEach(element => {
             if (id_user == element.idUser) {
                 hasOrder = true
+                var totalFormat = element.total.toLocaleString('vi-VN', { minimunFractionDigits: 0 }) + '.000VND'
                 html += `  
             <tr>
-                <td id="id-order">${element.id}</td>
+                <td><a href='/html/Orderdetail.html?id=${element.id}'>${element.id}</a></td>
                 <td>${element.dateOrder}</td>
-                <td>${element.total} VND</td>
+                <td>${totalFormat}</td>
                 <td>${element.statusPayment}</td>
                 <td>${element.statusOrder}</td>
             </tr>`
@@ -181,8 +197,25 @@ function add_address() {
                 address: address.value
             }
             console.log(data)
-            changeApi('Address_user', 'POST', data, getAddress)
-            alert('Thêm thành công!')
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: "success",
+                title: "Thêm địa chỉ thành công"
+            });
+            setTimeout(() => {
+                changeApi('Address_user', 'POST', data, getAddress)
+            }, 2000);
+
         })
     })
 }
@@ -217,7 +250,11 @@ function edit_address() {
                     btn_submit.addEventListener('click', () => {
                         console.log(Name_edit.value, address_edit.value);
                         if (Name_edit.value == '' || address_edit.value == '') {
-                            alert('Vui lòng nhập dữ liệu');
+                            Swal.fire({
+                                title: "Cảnh báo",
+                                text: "Vui lòng nhập dữ liệu",
+                                icon: "error"
+                            })
                         } else {
                             var data = {
                                 id: id,
@@ -226,8 +263,24 @@ function edit_address() {
                                 address: address_edit.value
                             };
                             console.log(id)
-                            changeApi('Address_user/' + id, 'PUT', data, getAddress);
-                            alert('Sửa thành công')
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: "top-end",
+                                showConfirmButton: false,
+                                timer: 2000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.onmouseenter = Swal.stopTimer;
+                                    toast.onmouseleave = Swal.resumeTimer;
+                                }
+                            });
+                            Toast.fire({
+                                icon: "success",
+                                title: "Sửa thành công"
+                            });
+                            setTimeout(() => {
+                                changeApi('Address_user/' + id, 'PUT', data, getAddress);
+                            }, 2000);
                         }
                     });
                 }
@@ -240,22 +293,71 @@ function delete_address() {
     class_list.forEach(elm => {
         elm.addEventListener('click', () => {
             var id = elm.getAttribute('id')
-            var confirm = window.confirm('Bạn có muốn xóa?')
             console.log(id)
-            if (confirm) {
-                changeApi('Address_user/' + id, "DELETE", null, getAddress)
-                alert('Xóa thành công')
-            }
+            Swal.fire({
+                title: "Cảnh báo",
+                text: "Bạn có muốn xóa địa chỉ này?",
+                icon: "question",
+                showCancelButton: true,
+                cancelButtonText: "Hủy",
+                cancelButtonColor: "#d33",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        }
+                    });
+                    Toast.fire({
+                        icon: "success",
+                        title: "Xóa thành công"
+                    });
+                    setTimeout(() => {
+                        changeApi('Address_user/' + id, "DELETE", null, getAddress)
+                    }, 2000);
+                }
+            })
         })
     })
 }
 function Logout() {
     var btn_logout = document.getElementById('Logout')
     btn_logout.addEventListener('click', () => {
-        var confirm = window.confirm('Bạn có muốn đăng xuất')
-        if (confirm) {
-            endSession()
-            window.location.href = '/html/Login.html'
-        }
+        Swal.fire({
+            title: "Cảnh báo",
+            text: "Bạn có muốn đăng xuất?",
+            icon: "question",
+            showCancelButton: true,
+            cancelButtonText: "Hủy",
+            cancelButtonColor: "#d33",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Toast.fire({
+                    icon: "success",
+                    title: "Đăng xuất thành công"
+                });
+                setTimeout(() => {
+                    endSession()
+                    window.location.href = '/html/Login.html'
+                }, 2000);
+            }
+        })
     })
 }

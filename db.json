@@ -23,10 +23,11 @@
     },
     {
       "id": "4",
-      "nameUser": " Nguyễn Văn Thuận",
+      "nameUser": "",
       "emailUser": "12@gmail.com",
-      "passwordUser": "12",
-      "phoneUser": "0373532273"
+      "passwordUser": "1",
+      "phoneUser": "",
+      "addressUser": ""
     }
   ],
   "Address_user": [
@@ -48,6 +49,7 @@
       "id": "1",
       "nameProduct": "Levents® Classic Sweater/ Black",
       "idCategories": "4",
+      "brandId": "1",
       "imageProduct": "https://levents.asia/cdn/shop/files/CLASSICSWEATER-MT.jpg?v=1703487601&width=713",
       "descriptionProduct": "Áo sweater oversize có độ dài phủ quá mông,phần tay áo rộng rãi, phần tay áo rộng rãi, form dáng thoải mái, thoáng mát khi mặc.",
       "priceProduct": 450,
@@ -65,6 +67,7 @@
       "id": "2",
       "nameProduct": "Levents® Flowers Window Tee/ Cream",
       "idCategories": "1",
+      "brandId": "1",
       "imageProduct": "https://levents.asia/cdn/shop/files/Cream_LTSOVCOA427UC0100SS24_1.jpg?v=1711360838&width=713",
       "descriptionProduct": "Áo oversize có độ dài phủ qua mông, phần tay áo rộng rãi, dài tay áo chạm khuỷu tay người mặc, form dáng thoải mái, rộng rãi khi mặc.",
       "priceProduct": 130,
@@ -83,6 +86,7 @@
       "id": "3",
       "nameProduct": "Levents® Classic Oversized Polo/ Cream",
       "idCategories": "2",
+      "brandId": "1",
       "imageProduct": "https://levents.asia/cdn/shop/files/MT_018dc3ea-d3d6-4b9f-9d78-99b085b93f38.jpg?v=1705381031&width=713",
       "descriptionProduct": "Áo sơ mi form oversize với độ dài phủ qua mông, rộng rãi, tôn dáng nhưng vẫn rất thoải mái khi mặc.",
       "priceProduct": 230,
@@ -101,6 +105,7 @@
       "id": "4",
       "nameProduct": "Levents® Cargo ShortPants/ Dark Green",
       "idCategories": "3",
+      "brandId": "1",
       "imageProduct": "https://levents.asia/cdn/shop/files/DarkGreen_LSPSPCOO231UG0201SS24_1.jpg?v=1712306941&width=713",
       "descriptionProduct": "Form shortpants dáng suông thẳng vừa, không quá ôm, không quá rộng mà vẫn đảm bảo mang đến sự thuận tiện và thoải mái cho hoạt động của người mặc một cách tốt nhất.",
       "priceProduct": 230,
@@ -118,6 +123,7 @@
       "id": "5",
       "nameProduct": "Levents® Cargo SweatPants/ Dark Green",
       "idCategories": "3",
+      "brandId": "1",
       "imageProduct": "https://levents.asia/cdn/shop/files/DarkGreen_LPASTCON232UG0202SS24_1.jpg?v=1712318357&width=713",
       "descriptionProduct": "Form SweatPants suông thẳng, không quá ôm, không quá rộng mà vẫn đảm bảo mang đến sự thuận tiện và thoải mái cho hoạt động của người mặc một cách tốt nhất.",
       "priceProduct": 460,
@@ -131,6 +137,20 @@
         "M",
         "XL"
       ]
+    }
+  ],
+  "Brand": [
+    {
+      "id": "1",
+      "nameBrand": "levents"
+    },
+    {
+      "id": "2",
+      "nameBrand": "paradox"
+    },
+    {
+      "id": "3",
+      "nameBrand": "lunacy"
     }
   ],
   "Categories": [
@@ -151,42 +171,47 @@
       "nameCategories": "sweater"
     }
   ],
-  "Cart": [
-    {
-      "id": "4",
-      "idProduct": "3",
-      "idUser": "1",
-      "quantityCart": 4,
-      "sizeCart": "XL",
-      "colorCart": "black"
-    },
-    {
-      "id": "5",
-      "idProduct": "1",
-      "idUser": "1",
-      "quantityCart": "1",
-      "sizeCart": "M",
-      "colorCart": "black"
-    }
-  ],
+  "Cart": [],
   "Order": [
     {
       "id": "1",
       "idUser": "1",
-      "dateOrder": "11-04-2003",
+      "dateOrder": "8-5-2024",
+      "phone": "0373532273",
+      "address": "Quảng Nam",
+      "statusOrder": "Xác nhận thành công",
+      "statusPayment": "Chưa thanh toán",
+      "total": "510"
+    },
+    {
+      "id": "2",
+      "idUser": "1",
+      "dateOrder": "8-5-2024",
+      "phone": "0373532273",
+      "address": "Quảng Nam",
       "statusOrder": "Đang xác nhận",
       "statusPayment": "Chưa thanh toán",
-      "total": "500.000"
+      "total": "280"
     }
   ],
   "orderDetails": [
     {
       "id": "1",
-      "idOrder": 1,
-      "idProduct": 1,
-      "quantityOrder": 2,
+      "idOrder": "1",
+      "idProduct": "5",
+      "quantityOrder": 1,
+      "totalOrder": 460,
+      "colorOrder": "black",
+      "sizeOrder": "M"
+    },
+    {
+      "id": "2",
+      "idOrder": "2",
+      "idProduct": "4",
+      "quantityOrder": "1",
+      "totalOrder": 230,
       "colorOrder": "blue",
-      "sizeOrder": "S"
+      "sizeOrder": "M"
     }
   ],
   "Admin": [
@@ -194,6 +219,32 @@
       "id": "1",
       "nameAdmin": "thuan",
       "passwordAdmin": "thuan123"
+    }
+  ],
+  "Voucher": [
+    {
+      "id": "1",
+      "codeVoucher": "20kDON399",
+      "conditionVoucher": 399,
+      "valueVoucher": 20
+    },
+    {
+      "id": "2",
+      "codeVoucher": "30kDON499",
+      "conditionVoucher": 499,
+      "valueVoucher": 30
+    },
+    {
+      "id": "3",
+      "codeVoucher": "25kDON420",
+      "conditionVoucher": 420,
+      "valueVoucher": 25
+    },
+    {
+      "id": "4",
+      "codeVoucher": "20kDON0",
+      "conditionVoucher": 0,
+      "valueVoucher": 20
     }
   ]
 }

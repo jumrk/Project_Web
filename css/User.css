@@ -6,6 +6,10 @@
     font-style: normal;
 }
 
+main {
+    min-height: 100vh;
+}
+
 .form-edit-user {
     position: fixed;
     width: 100%;
@@ -242,6 +246,7 @@ body {
     border-bottom: 1px solid silver;
     border-top: 1px solid silver;
     font-weight: 400;
+    width: 200px;
 }
 
 .content-user-order table td {

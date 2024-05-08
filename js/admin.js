@@ -1,118 +1,208 @@
+import { changeApi } from "/main/changApi.js";
+function start() {
+    select_size_color()
+    statistics()
+    showContent()
+    renderProduct()
+    searchProduct()
+    renderOrder()
+    document.getElementById('searchInput').addEventListener('input', searchProduct);
+}
+start()
+function showContent() {
+    var contents = document.querySelectorAll('.show')
+    var btn_thongke = document.getElementById('btn-thongke')
+    var btn_product = document.getElementById('btn-product')
+    var btn_account = document.getElementById('btn-account')
+    var btn_order = document.getElementById('btn-order')
+    var btn_voucher = document.getElementById('btn-voucher')
+
+    btn_thongke.addEventListener('click', () => {
+        contents.forEach(elm => {
+            elm.classList.remove('active')
+        })
+        contents[0].classList.add('active')
+    })
+    btn_product.addEventListener('click', () => {
+        contents.forEach(elm => {
+            elm.classList.remove('active')
+        })
+        contents[1].classList.add('active')
+    })
+    btn_account.addEventListener('click', () => {
+        contents.forEach(elm => {
+            elm.classList.remove('active')
+        })
+        contents[2].classList.add('active')
+    })
+    btn_order.addEventListener('click', () => {
+        contents.forEach(elm => {
+            elm.classList.remove('active')
+        })
+        contents[3].classList.add('active')
+    })
+    btn_voucher.addEventListener('click', () => {
+        contents.forEach(elm => {
+            elm.classList.remove('active')
+        })
+        contents[4].classList.add('active')
+    })
+}
+function statistics() {
+    changeApi('Product', 'GET', null, Courese => {
+        document.getElementById('total-product').innerHTML = Courese.length
+    })
+    changeApi('User', 'GET', null, Courese => {
+        document.getElementById('total-account').innerHTML = Courese.length
+    })
+    changeApi('Order', 'GET', null, Courese => {
+        var total = 0
+        document.getElementById('total-order').innerHTML = Courese.length
+        Courese.forEach(elm => {
+            total += parseInt(elm.total)
+        })
+        var formatTotal = total.toLocaleString('vi-VN', { minimumFractionDigits: 0 }) + ".000VND"
+        document.getElementById('total-revenue').innerHTML = formatTotal
+    })
+}
 function renderProduct() {
     axios.get('http://localhost:3000/Product')
         .then(response => {
-            let dataProduct = response.data
-            let renderProduct = dataProduct.map(dataProduct => {
+            let data = response.data
+            let html = data.map(data => {
                 return `
-                <tr>
-                    <td>${dataProduct.id}</td>
-                    <td>${dataProduct.nameProduct}</td>
-                    <td>${dataProduct.imageProduct}</td>
-                    <td>${dataProduct.descriptionProduct}</td>
-                    <td>${dataProduct.colorProduct}</td>
-                    <td>${dataProduct.quannityProduct}</td>
-                    <td>${dataProduct.sizeProduct}</td>
-                    <td>
-                    <button data-toggle="modal" data-target="#updateProduct" id="update" onclick="updateProduct(${dataProduct.id})" ><i class="fa fa-cogs"></i></button>
-                    <button onclick="deletedProdcut(${dataProduct.id})" id="deleted"><i class="fa fa-trash"></i></button>
-                    </td>
-                </tr>
-            `
+           <tr>
+           <td>${data.id}</td>
+           <td>${data.nameProduct}</td>
+           <td><img src="${data.imageProduct}" alt=""></td>
+           <td>${data.idCategories}</td>
+           <td>${data.brandId}</td>
+           <td>${data.descriptionProduct}</td>
+           <td>${data.priceProduct}</td>
+           <td>${data.quantityProduct}</td>
+           <td>${data.colorProduct}</td>
+           <td>${data.sizeProduct}</td>
+           <td><ion-icon name="settings-outline"></ion-icon>
+               <ion-icon name="trash-outline"></ion-icon>
+           </td>
+       </tr>`
             }).join('')
-            document.getElementById('tbl').innerHTML = renderProduct
-        })
-        .catch(error => {
-            console.log(error);
+            document.getElementById('renderProduct').innerHTML = html
         })
 }
-function addProduct() {
-    let isEmty = true
-    let i
-    let Product = {
-        nameProduct: document.getElementById('nameProduct').value,
-        imageProduct: document.getElementById('imgProduct').value,
-        descriptionProduct: document.getElementById('desProduct').value,
-        colorProduct: document.getElementById('colorProduct').value,
-        quannityProduct: document.getElementById('quanityProduct').value,
-        sizeProduct: document.getElementById('sizeProduct').value
-    }
+function searchProduct() {
+    var searchValue = document.getElementById('searchInput').value.toLowerCase();
 
     axios.get('http://localhost:3000/Product')
         .then(response => {
-            let dataProduct = response.data
-            for(i = 0; i < dataProduct.length; i++) {
-                if (Product.nameProduct.toLowerCase() == dataProduct[i].nameProduct.toLowerCase()) {
-                    isEmty = false
-                } else {
-                    isEmty = true
-                }
-            }
-            if (isEmty) {
-                axios.post('http://localhost:3000/Product', Product)
-                    .then(response => {
-                        renderProduct()
-                        resetFormAdd()
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    })
-            }else{
-                alert('Đã tồn tại tên sản phẩm này')
-            }
-        })
-        .catch(error => {
-            console.log(error);
-        })
-}
-function resetFormAdd() {
-    document.getElementById('nameProduct').value = ''
-    document.getElementById('imgProduct').value = ''
-    document.getElementById('desProduct').value = ''
-    document.getElementById('colorProduct').value = ''
-    document.getElementById('quanityProduct').value = ''
-    document.getElementById('sizeProduct').value = ''
-}
-function deletedProdcut(idProduct) {
-    axios.delete(`http://localhost:3000/Product/${idProduct}`)
-        .then(response => {
-            renderProduct()
-        })
-        .catch(error => {
-            console.log(error);
-        })
-}
-function updateProduct(idProduct) {
-    axios.get(`http://localhost:3000/Product/${idProduct}`)
-        .then(response => {
-            let dataProduct = response.data
-            document.getElementById('idUp').value = dataProduct.id
-            document.getElementById('nameProductUp').value = dataProduct.nameProduct
-            document.getElementById('imgProductUp').value = dataProduct.imageProduct
-            document.getElementById('desProductUp').value = dataProduct.descriptionProduct
-            document.getElementById('colorProductUp').value = dataProduct.colorProduct
-            document.getElementById('quanityProductUp').value = dataProduct.quannityProduct
-            document.getElementById('sizeProductUp').value = dataProduct.sizeProduct
-        })
-        .catch(error => {
-            console.log(error);
-        })
+            let data = response.data;
 
-    document.getElementById('updated').addEventListener('click', () => {
-        let updateProduct = {
-            nameProduct: document.getElementById('nameProductUp').value,
-            imageProduct: document.getElementById('imgProductUp').value,
-            descriptionProduct: document.getElementById('desProductUp').value,
-            colorProduct: document.getElementById('colorProductUp').value,
-            quannityProduct: document.getElementById('quanityProductUp').value,
-            sizeProduct: document.getElementById('sizeProductUp').value
-        }
-        axios.put(`http://localhost:3000/Product/${idProduct}`, updateProduct)
-            .then(response => {
-                renderProduct()
-            })
-            .catch(error => {
-                console.log(error);
-            })
+            var filteredProducts = data.filter(product => {
+                return product.nameProduct.toLowerCase().indexOf(searchValue) !== -1;
+            });
+
+            let html = filteredProducts.map(product => {
+                return `
+                    <tr>
+                        <td>${product.id}</td>
+                        <td>${product.nameProduct}</td>
+                        <td><img src="${product.imageProduct}" alt=""></td>
+                        <td>${product.idCategories}</td>
+                        <td>${product.brandId}</td>
+                        <td>${product.descriptionProduct}</td>
+                        <td>${product.priceProduct}</td>
+                        <td>${product.quantityProduct}</td>
+                        <td>${product.colorProduct}</td>
+                        <td>${product.sizeProduct}</td>
+                        <td><ion-icon name="settings-outline"></ion-icon>
+                            <ion-icon name="trash-outline"></ion-icon>
+                        </td>
+                    </tr>`;
+            }).join('');
+
+            document.getElementById('renderProduct').innerHTML = html;
+        });
+}
+function select_size_color() {
+    var btn = document.getElementById('btn-select')
+    var input_color = document.getElementById('color')
+    var input_size = document.getElementById('size')
+    var show_color = document.getElementById('show-color')
+    var show_size = document.getElementById('show-size')
+    var colorArr = []
+    var sizeArr = []
+    btn.addEventListener('click', () => {
+        colorArr.push(input_color.value)
+        sizeArr.push(input_size.value)
+        colorArr.forEach(elm => {
+            show_color.innerHTML = elm + ','
+        })
+        sizeArr.forEach(elm => {
+            show_size.innerHTML = elm + ","
+        })
     })
 }
-
+function renderOrder() {
+    changeApi('Order', 'GET', null, Courese => {
+        var html = ``
+        Courese.forEach(elm => {
+            renderUser(elm.idUser,(Name)=>{
+                html += ` <tr>
+                <td>${elm.id}</td>
+                <td>${Name}</td>
+                <td>${elm.dateOrder}</td>
+                <td>${elm.phone}</td>
+                <td>${elm.address}</td>
+                <td>${elm.statusOrder}</td>
+                <td>${elm.statusPayment}</td>
+                <td><ion-icon class="edit" id="${elm.id}" name="settings-outline" data-bs-toggle="modal" data-bs-target="#editOrder"></ion-icon>
+                    <ion-icon id="delete-order" name="trash-outline"></ion-icon>
+                </td>
+            </tr>`
+            document.getElementById('show-order').innerHTML = html
+            updateOrder()
+            })
+        })
+    })
+}
+function updateOrder(){
+    var list = document.querySelectorAll('.edit')
+    var select = document.getElementById('select-status-oder')
+    var btn_update = document.getElementById('saveOrderStatusButton')
+    list.forEach(elm=>{
+        elm.addEventListener('click',()=>{
+            var id = elm.getAttribute('id')
+            changeApi('Order','GET',null,Courese=>{
+                Courese.forEach(elm=>{
+                    if(id == elm.id){
+                        select.value = elm.statusOrder
+                        btn_update.addEventListener('click',()=>{
+                            var data =  {
+                                id: elm.id,
+                                idUser: elm.idUser,
+                                dateOrder: elm.dateOrder,
+                                phone: elm.phone,
+                                address: elm.address,
+                                statusOrder: select.value,
+                                statusPayment: elm.statusPayment,
+                                total: elm.total
+                              }
+                            changeApi('Order/'+elm.id,"PUT",data,()=>{
+                                alert("Cập nhật thành công")
+                            })
+                        })
+                    }
+                })
+            })
+        })
+    })
+}
+function renderUser(id,callback){
+    changeApi('User','GET',null,Courese=>{
+        Courese.forEach(elm=>{
+            if(id == elm.id){
+                callback(elm.nameUser)
+            }
+        })
+    })
+}

@@ -1,5 +1,5 @@
 import { changeApi } from "/main/changApi.js";
-import { startSession,getSession,endSession } from "/main/changSession.js";
+import { startSession, getSession, endSession } from "/main/changSession.js";
 function start() {
     animation_login_signup()
     sign_Up()
@@ -62,10 +62,25 @@ function sign_Up() {
                                 phoneUser: '',
                                 addressUser: ''
                             }
-                            changeApi('User', 'POST', data, (Courses) => {
-                                console.log(Courses)
-                                alert("Đăng ký thành công")
-                            })
+
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: "top-end",
+                                showConfirmButton: false,
+                                timer: 2000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.onmouseenter = Swal.stopTimer;
+                                    toast.onmouseleave = Swal.resumeTimer;
+                                }
+                            });
+                            Toast.fire({
+                                icon: "success",
+                                title: "Đăng ký thành công"
+                            });
+                            setTimeout(() => {
+                                changeApi('User', 'POST', data, null)
+                            }, 2000);
                         })
                     }
                 })
@@ -97,10 +112,26 @@ function Login() {
                                 error('errorPassword_login', password_Value, 'Vui lòng nhập mật khẩu', 'Mật khẩu không chính xác')
                             } else {
                                 if (Password == Courses[i].passwordUser) {
-                                    alert("đăng nhập thành công")
-                                    startSession(Courses[i].id)
-                                    window.location.href = '/index.html'
-                                    console.log(getSession())
+                                    const Toast = Swal.mixin({
+                                        toast: true,
+                                        position: "top-end",
+                                        showConfirmButton: false,
+                                        timer: 2000,
+                                        timerProgressBar: true,
+                                        didOpen: (toast) => {
+                                            toast.onmouseenter = Swal.stopTimer;
+                                            toast.onmouseleave = Swal.resumeTimer;
+                                        }
+                                    });
+                                    Toast.fire({
+                                        icon: "success",
+                                        title: "Đăng nhập thành công"
+                                    });
+                                    setTimeout(() => {
+                                        startSession(Courses[i].id)
+                                        window.location.href = '/index.html'
+                                        console.log(getSession())
+                                    }, 2000);
                                 } else {
                                     error('errorPassword_login', password_Value, 'Mật khẩu không chính xác', 'Mật khẩu không chính xác')
                                 }

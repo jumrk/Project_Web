@@ -3,13 +3,17 @@ import { getSession } from "/main/changSession.js";
 function start() {
     loadHeaderfooter()
     render_product()
+    render_product_new()
 }
 start()
-
+function loading() {
+    $("body").load("/html/loading.html");
+}
 function render_product() {
     var id = getParamid()
     var view_img = document.getElementById('view_img')
     var view_name = document.getElementById('view_name')
+    var view_brand = document.getElementById('Show-brand')
     var view_price = document.getElementById('view_price')
     var view_description = document.getElementById('show-descript')
     changeApi('Product', 'GET', null, (Courese) => {
@@ -20,6 +24,9 @@ function render_product() {
                 view_name.innerHTML = elm.nameProduct
                 view_price.innerHTML = formatted + '.000'
                 view_description.innerHTML = elm.descriptionProduct
+                render_brand(elm.brandId, nameBrand => {
+                    view_brand.innerHTML = nameBrand.toUpperCase()
+                })
             }
         })
         show_descript_product()
@@ -28,6 +35,15 @@ function render_product() {
         plus()
         minus()
         add_cart()
+    })
+}
+function render_brand(id, Callback) {
+    changeApi('Brand', 'GET', null, Courses => {
+        Courses.forEach(elm => {
+            if (elm.id == id) {
+                Callback(elm.nameBrand)
+            }
+        })
     })
 }
 function getParamid() {
@@ -141,39 +157,137 @@ function add_cart() {
         var quantity_value = quantity.value
         console.log(quantity_value)
         if (getSession() == null) {
-            alert('Vui lòng đăng nhập')
+            Swal.fire({
+                title: "Cảnh báo",
+                text: "Vui lòng đăng nhập",
+                icon: "error"
+            });
         } else {
             var size_value = size.innerText
             var color_value = color.innerText
             var id = 0
             if (size_value == '') {
-                alert('Vui lòng chọn size sản phẩm')
+                Swal.fire({
+                    title: "Cảnh báo",
+                    text: "Vui lòng chọn size sản phẩm",
+                    icon: "error"
+                })
             } else if (color_value == '') {
-                alert('Vui lòng chọn màu sản phẩm')
+                Swal.fire({
+                    title: "Cảnh báo",
+                    text: "Vui lòng chọn màu sản phẩm",
+                    icon: "error"
+                })
             } else {
                 changeApi('Cart', 'GET', null, Courese => {
                     Courese.forEach(elm => {
                         id = elm.id
                     })
                     id++
-                    var data = {
-                        id: id.toString(),
-                        idProduct: idProduct,
-                        idUser: getSession(),
-                        quantityCart: quantity_value,
-                        sizeCart: size_value,
-                        colorCart: color_value
-                    }
-                    console.log(data)
-                    changeApi('Cart', "POST", data, () => {
-                        alert('Thêm vào giỏ hành thành công')
+                    getPriceProduct(idProduct, price => {
+                        var totalCart = parseInt(quantity_value) * parseInt(price)
+                        var data = {
+                            id: id.toString(),
+                            idProduct: idProduct,
+                            idUser: getSession(),
+                            quantityCart: quantity_value,
+                            totalCart: totalCart,
+                            sizeCart: size_value,
+                            colorCart: color_value
+                        }
+                        console.log(data)
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: "top-end",
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.onmouseenter = Swal.stopTimer;
+                                toast.onmouseleave = Swal.resumeTimer;
+                            }
+                        });
+                        Toast.fire({
+                            icon: "success",
+                            title: "Thêm giỏ hàng thành công"
+                        });
+                        setTimeout(() => {
+                            changeApi('Cart', "POST", data, null)
+                        }, 2000);
                     })
+
                 })
             }
         }
     })
 }
+function getPriceProduct(id, Callback) {
+    changeApi('Product', 'GET', null, Courese => {
+        Courese.forEach(elm => {
+            if (elm.id == id) {
+                Callback(elm.priceProduct)
+                return
+            }
+        })
+    })
+}
 function loadHeaderfooter() {
     $("#header").load("/html/header.html");
     $("#footer").load("/html/footer.html");
+}
+function render_product_new() {
+    changeApi('Product', 'GET', null, (Courese) => {
+        var a = 1
+        var html = ``
+        for (var i = Courese.length - 1; i >= 0; i--) {
+            if (a > 4) {
+                break
+            }
+            var formatted = Courese[i].priceProduct.toLocaleString('vi-VN', { minimumFractionDigits: 0 })
+            html += `<div class="card" id="${Courese[i].id}">
+            <img src="${Courese[i].imageProduct}" alt="">
+            <p>${Courese[i].nameProduct}</p>
+            <div class="Color" id='Color-span'>
+            </div>
+            <b>${formatted}.000VND</b>
+        </div>`
+            a++
+        }
+
+
+        document.getElementById('show-product-new').innerHTML = html
+        click_product()
+        show_color_product()
+    })
+
+}
+function show_color_product() {
+    var class_list_card = document.querySelectorAll('.card');
+    changeApi('Product', 'GET', null, (Courese) => {
+        class_list_card.forEach(element => {
+            var id = element.getAttribute('id');
+            var span_html = ``;
+            var product = Courese.find(item => item.id === id);
+            if (product) {
+                product.colorProduct.forEach(value => {
+                    span_html += `<span style="background-color: ${value}"></span>`;
+                });
+                element.querySelector('.Color').innerHTML = span_html;
+            }
+        });
+    });
+}
+
+function click_product() {
+    var class_list_card = document.querySelectorAll('.card')
+    class_list_card.forEach(element => {
+        element.addEventListener('click', () => {
+            var id = element.getAttribute('id')
+            console.log(id)
+            loading()
+            setTimeout(() => {
+                window.location.href = '/html/Product.html?id=' + id
+            }, 1000);
+        })
+    })
 }
