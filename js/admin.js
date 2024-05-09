@@ -6,6 +6,9 @@ function start() {
     renderProduct()
     searchProduct()
     renderOrder()
+    renderVoucher()
+    renderAccount()
+    addVoucher()
     document.getElementById('searchInput').addEventListener('input', searchProduct);
 }
 start()
@@ -123,30 +126,41 @@ function searchProduct() {
             document.getElementById('renderProduct').innerHTML = html;
         });
 }
-function select_size_color() {
-    var btn = document.getElementById('btn-select')
-    var input_color = document.getElementById('color')
-    var input_size = document.getElementById('size')
-    var show_color = document.getElementById('show-color')
-    var show_size = document.getElementById('show-size')
-    var colorArr = []
-    var sizeArr = []
+
+function select_size_color(callback) {
+    var btn = document.getElementById('btn-select');
+    var input_color = document.getElementById('color');
+    var input_size = document.getElementById('size');
+    var show_color = document.getElementById('show-color');
+    var show_size = document.getElementById('show-size');
+    var colorArr = [];
+    var sizeArr = [];
     btn.addEventListener('click', () => {
-        colorArr.push(input_color.value)
-        sizeArr.push(input_size.value)
-        colorArr.forEach(elm => {
-            show_color.innerHTML = elm + ','
-        })
-        sizeArr.forEach(elm => {
-            show_size.innerHTML = elm + ","
-        })
-    })
+        if (!colorArr.includes(input_color.value)) {
+            colorArr.push(input_color.value);
+            var span = ``
+            colorArr.forEach(elm => {
+                span += `<span style="height: 20px;margin-right: 5px;width: 20px;display: inline-block; border-radius: 5px; background-color: ${elm};"></span>`;
+            })
+            show_color.innerHTML = span
+        }
+        if (input_size.value !== '') {
+            if (!sizeArr.includes(input_size.value)) {
+                sizeArr.push(input_size.value)
+                show_size.innerHTML = sizeArr.join(', ')
+
+            }
+        }
+        callback(sizeArr, colorArr)
+    });
 }
+
+
 function renderOrder() {
     changeApi('Order', 'GET', null, Courese => {
         var html = ``
         Courese.forEach(elm => {
-            renderUser(elm.idUser,(Name)=>{
+            renderUser(elm.idUser, (Name) => {
                 html += ` <tr>
                 <td>${elm.id}</td>
                 <td>${Name}</td>
@@ -159,25 +173,25 @@ function renderOrder() {
                     <ion-icon id="delete-order" name="trash-outline"></ion-icon>
                 </td>
             </tr>`
-            document.getElementById('show-order').innerHTML = html
-            updateOrder()
+                document.getElementById('show-order').innerHTML = html
+                updateOrder()
             })
         })
     })
 }
-function updateOrder(){
+function updateOrder() {
     var list = document.querySelectorAll('.edit')
     var select = document.getElementById('select-status-oder')
     var btn_update = document.getElementById('saveOrderStatusButton')
-    list.forEach(elm=>{
-        elm.addEventListener('click',()=>{
+    list.forEach(elm => {
+        elm.addEventListener('click', () => {
             var id = elm.getAttribute('id')
-            changeApi('Order','GET',null,Courese=>{
-                Courese.forEach(elm=>{
-                    if(id == elm.id){
+            changeApi('Order', 'GET', null, Courese => {
+                Courese.forEach(elm => {
+                    if (id == elm.id) {
                         select.value = elm.statusOrder
-                        btn_update.addEventListener('click',()=>{
-                            var data =  {
+                        btn_update.addEventListener('click', () => {
+                            var data = {
                                 id: elm.id,
                                 idUser: elm.idUser,
                                 dateOrder: elm.dateOrder,
@@ -186,8 +200,8 @@ function updateOrder(){
                                 statusOrder: select.value,
                                 statusPayment: elm.statusPayment,
                                 total: elm.total
-                              }
-                            changeApi('Order/'+elm.id,"PUT",data,()=>{
+                            }
+                            changeApi('Order/' + elm.id, "PUT", data, () => {
                                 alert("Cập nhật thành công")
                             })
                         })
@@ -197,12 +211,129 @@ function updateOrder(){
         })
     })
 }
-function renderUser(id,callback){
-    changeApi('User','GET',null,Courese=>{
-        Courese.forEach(elm=>{
-            if(id == elm.id){
+function renderUser(id, callback) {
+    changeApi('User', 'GET', null, Courese => {
+        Courese.forEach(elm => {
+            if (id == elm.id) {
                 callback(elm.nameUser)
             }
         })
+    })
+}
+function renderAccount() {
+    changeApi('User', 'GET', null, Courese => {
+        var html = ``
+        Courese.forEach(elm => {
+            html += `  <tr>
+            <td>${elm.id}</td>
+            <td>${elm.nameUser}</td>
+            <td>${elm.emailUser}</td>
+            <td>${elm.passwordUser}</td>
+            <td>${elm.phoneUser}</td>
+            <td>
+                <ion-icon class="btn-delete" id="${elm.id}" name="trash-outline"></ion-icon>
+            </td>
+        </tr>`
+        })
+        document.getElementById('show-account').innerHTML = html
+        deleteAccount()
+    })
+}
+function deleteAccount() {
+    var listBtn = document.querySelectorAll('.btn-delete')
+    listBtn.forEach(elm => {
+        elm.addEventListener('click', () => {
+            var id = elm.getAttribute('id')
+            changeApi('User/' + id, "DELETE", null, renderAccount)
+        })
+    })
+}
+function renderVoucher() {
+    changeApi('Voucher', 'GET', null, Courese => {
+        var html = ``
+        Courese.forEach(elm => {
+            html += ` <tr>
+            <td>${elm.id}</td>
+            <td>${elm.codeVoucher}</td>
+            <td> >${elm.conditionVoucher}.000VND</td>
+            <td>Giảm ${elm.valueVoucher}.000VND</td>
+            <td><ion-icon class="edit-voucher" id="${elm.id}" name="settings-outline" data-bs-toggle="modal" data-bs-target="#editVoucher"></ion-icon>
+                <ion-icon class="delete-voucher" id="${elm.id}"name="trash-outline"></ion-icon>
+            </td>
+        </tr>`
+        })
+        document.getElementById('show-voucher').innerHTML = html
+        deleteVoucher()
+        editVoucher()
+    })
+}
+function deleteVoucher() {
+    var list = document.querySelectorAll('.delete-voucher')
+    list.forEach(elm => {
+        elm.addEventListener('click', () => {
+            var id = elm.getAttribute('id')
+            changeApi('Voucher/' + id, "DELETE", null, renderVoucher)
+        })
+    })
+}
+function editVoucher() {
+    var list = document.querySelectorAll('.edit-voucher')
+    var codeVoucheredit = document.getElementById('codeVoucheredit')
+    var conditionVoucheredit = document.getElementById('conditionVoucheredit')
+    var valueVoucheredit = document.getElementById('valueVoucheredit')
+    var btn = document.getElementById('Btn-edit-voucher')
+    list.forEach(elm => {
+        elm.addEventListener('click', () => {
+            var id = elm.getAttribute('id')
+            changeApi('Voucher', 'GET', null, Courese => {
+                Courese.forEach(elm => {
+                    if (elm.id == id) {
+                        codeVoucheredit.value = elm.codeVoucher
+                        conditionVoucheredit.value = elm.conditionVoucher
+                        valueVoucheredit.value = elm.valueVoucher
+                        btn.addEventListener('click', () => {
+                            if (codeVoucheredit.value == '' || conditionVoucheredit.value == '' || valueVoucheredit.value == '') {
+                                alert('Vui lòng nhập dữ liệu')
+                            } else {
+                                var data = {
+                                    id: id,
+                                    codeVoucher: codeVoucheredit.value,
+                                    conditionVoucher: conditionVoucheredit.value,
+                                    valueVoucher: valueVoucheredit.value
+                                }
+                                changeApi('Voucher/' + id, "PUT", data, renderVoucher)
+                            }
+                        })
+                    }
+                })
+            })
+        })
+    })
+}
+function addVoucher(){
+    var codeVoucher = document.getElementById('codeVoucher')
+    var conditionVoucher = document.getElementById('conditionVoucher')
+    var valueVoucher = document.getElementById('valueVoucher')
+    var btn = document.getElementById('BtnaddVoucher')
+    btn.addEventListener('click',()=>{
+        if(codeVoucher.value == ''||conditionVoucher.value == ''||valueVoucher.value == ''){
+            alert("Vui lòng nhập dữ liệu")
+        }else{
+            var id = 0
+           changeApi("Voucher","GET",null,Courese=>{
+              Courese.forEach(elm=>{
+                 id = parseInt(elm.id)
+              });
+              id++;
+              console.log()
+              var data = {
+                id: id.toString(),
+                codeVoucher: codeVoucher.value,
+                conditionVoucher: parseInt(conditionVoucher.value),
+                valueVoucher: parseInt(valueVoucher.value)
+              }
+              changeApi('Voucher','POST',data,renderVoucher)
+           })
+        }
     })
 }

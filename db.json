@@ -4,15 +4,8 @@
       "id": "1",
       "nameUser": " Nguyễn Văn Thuận",
       "emailUser": "Jumrk03@gmail.com",
-      "passwordUser": "123",
+      "passwordUser": "thuan",
       "phoneUser": "0373532273"
-    },
-    {
-      "id": "2",
-      "nameUser": "",
-      "emailUser": "1@gmail.com",
-      "passwordUser": "1",
-      "phoneUser": ""
     },
     {
       "id": "3",
@@ -20,14 +13,6 @@
       "emailUser": "iamjumr03@gmail.com",
       "passwordUser": "1",
       "phoneUser": "0373532273"
-    },
-    {
-      "id": "4",
-      "nameUser": "",
-      "emailUser": "12@gmail.com",
-      "passwordUser": "1",
-      "phoneUser": "",
-      "addressUser": ""
     }
   ],
   "Address_user": [
@@ -174,16 +159,6 @@
   "Cart": [],
   "Order": [
     {
-      "id": "1",
-      "idUser": "1",
-      "dateOrder": "8-5-2024",
-      "phone": "0373532273",
-      "address": "Quảng Nam",
-      "statusOrder": "Xác nhận thành công",
-      "statusPayment": "Chưa thanh toán",
-      "total": "510"
-    },
-    {
       "id": "2",
       "idUser": "1",
       "dateOrder": "8-5-2024",
@@ -192,18 +167,19 @@
       "statusOrder": "Đang vận chuyển",
       "statusPayment": "Chưa thanh toán",
       "total": "280"
+    },
+    {
+      "id": "3",
+      "idUser": "1",
+      "dateOrder": "9-5-2024",
+      "phone": "0373532273",
+      "address": "Quảng Nam",
+      "statusOrder": "Đang vận chuyển",
+      "statusPayment": "Chưa thanh toán",
+      "total": "710"
     }
   ],
   "orderDetails": [
-    {
-      "id": "1",
-      "idOrder": "1",
-      "idProduct": "5",
-      "quantityOrder": 1,
-      "totalOrder": 460,
-      "colorOrder": "black",
-      "sizeOrder": "M"
-    },
     {
       "id": "2",
       "idOrder": "2",
@@ -217,7 +193,7 @@
       "id": "3",
       "idOrder": "3",
       "idProduct": "3",
-      "quantityOrder": 3,
+      "quantityOrder": "3",
       "totalOrder": 690,
       "colorOrder": "black",
       "sizeOrder": "M"
@@ -234,8 +210,8 @@
     {
       "id": "1",
       "codeVoucher": "20kDON399",
-      "conditionVoucher": 399,
-      "valueVoucher": 20
+      "conditionVoucher": "0",
+      "valueVoucher": "20"
     },
     {
       "id": "2",
@@ -251,8 +227,8 @@
     },
     {
       "id": "4",
-      "codeVoucher": "20kDON0",
-      "conditionVoucher": 0,
+      "codeVoucher": "20k",
+      "conditionVoucher": 300,
       "valueVoucher": 20
     }
   ]

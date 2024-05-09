@@ -22,6 +22,7 @@
     <nav>
         <div class="title-nav">
             <p>ADMIN</p>
+
         </div>
         <div class="content-nav">
             <div class="list-menu">
@@ -138,20 +139,11 @@
                                     <th>Email</th>
                                     <th>Mật khẩu</th>
                                     <th>Số điện thoại</th>
-                                    <th>Sửa/Xóa</th>
+                                    <th>Xóa</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Nguyễn Văn Thuận</td>
-                                    <td>Jumrk03@gmail.com</td>
-                                    <td>thuan123</td>
-                                    <td>0373532273</td>
-                                    <td><ion-icon name="settings-outline"></ion-icon>
-                                        <ion-icon name="trash-outline"></ion-icon>
-                                    </td>
-                                </tr>
+                            <tbody id="show-account">
+                            
                             </tbody>
                         </table>
                     </div>
@@ -177,7 +169,7 @@
                                 </tr>
                             </thead>
                             <tbody id="show-order">
-                               
+
                             </tbody>
                         </table>
                     </div>
@@ -186,7 +178,7 @@
             <div class="show" id="voucher">
                 <div class="title-product">
                     <h2>Quản lý voucher</h2>
-                    <ion-icon class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    <ion-icon class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addVoucher"
                         name="add-outline"></ion-icon>
 
                 </div>
@@ -202,16 +194,8 @@
                                     <th>Sửa/Xóa</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>20kDON399</td>
-                                    <td>399</td>
-                                    <td>20</td>
-                                    <td><ion-icon name="settings-outline"></ion-icon>
-                                        <ion-icon name="trash-outline"></ion-icon>
-                                    </td>
-                                </tr>
+                            <tbody id="show-voucher">
+                               
                             </tbody>
                         </table>
                     </div>
@@ -220,7 +204,7 @@
         </div>
         <!-- modal addProduct -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="addProduct" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Thêm sản phẩm</h5>
@@ -324,27 +308,103 @@
         <!-- modal edit order -->
         <div class="modal fade" id="editOrder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Cập nhật tình trạng đơn hàng</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Cập nhật tình trạng đơn hàng</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <select id="select-status-oder" class="form-select" aria-label="Default select example">
+                            <option selected>Mở menu</option>
+                            <option value="Đang xác nhận">Đang xác nhận</option>
+                            <option value="Xác nhận thành công">Xác nhận thành công</option>
+                            <option value="Đang vận chuyển">Đang vận chuyển</option>
+                            <option value="Vận chuyển thành công">Vận chuyển thành công</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
+                        <button type="button" id="saveOrderStatusButton" class="btn btn-primary">Lưu</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <select id="select-status-oder" class="form-select" aria-label="Default select example">
-                        <option selected>Mở menu</option>
-                        <option value="Đang xác nhận">Đang xác nhận</option>
-                        <option value="Xác nhận thành công">Xác nhận thành công</option>
-                        <option value="Đang vận chuyển">Đang vận chuyển</option>
-                        <option value="Vận chuyển thành công">Vận chuyển thành công</option>
-                      </select>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
-                  <button type="button" id="saveOrderStatusButton" class="btn btn-primary">Lưu</button>
-                </div>
-              </div>
             </div>
-          </div>
+        </div>
+        <!-- modal add voucher -->
+        <div class="modal fade" id="addVoucher" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm voucher</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="codeVoucher" class="form-label">Mã Voucher</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="codeVoucher"
+                                    aria-describedby="basic-addon3 basic-addon4">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="conditionVoucher" class="form-label">Điều kiện</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="conditionVoucher"
+                                    aria-describedby="basic-addon3 basic-addon4">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="valueVoucher" class="form-label">Giá trị mã</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="valueVoucher"
+                                    aria-describedby="basic-addon3 basic-addon4">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
+                        <button type="button" id="BtnaddVoucher" class="btn btn-primary">Lưu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- modal edit voucher -->
+        <div class="modal fade" id="editVoucher" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Sửa voucher</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="codeVoucheredit" class="form-label">Mã Voucher</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="codeVoucheredit"
+                                    aria-describedby="basic-addon3 basic-addon4">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="conditionVoucheredit" class="form-label">Điều kiện</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="conditionVoucheredit"
+                                    aria-describedby="basic-addon3 basic-addon4">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="valueVoucheredit" class="form-label">Giá trị mã</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="valueVoucheredit"
+                                    aria-describedby="basic-addon3 basic-addon4">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
+                        <button type="button" id="Btn-edit-voucher" class="btn btn-primary">Lưu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 </body>
 <script type="module" src="/js/admin.js"></script>
