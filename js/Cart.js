@@ -83,7 +83,6 @@ function Minus_Plus() {
                 Courese.forEach(elm => {
                     if (elm.id == id) {
                         var quantityCart = parseInt(elm.quantityCart)
-                        var totalCart = elm.totalCart
                         if (quantityCart > 1) {
                             var quantity = quantityCart -= 1
                             renderProduct(elm.idProduct, (nameProduct, idProduct, imageProduct, priceProduct, quantityProduct) => {
@@ -163,9 +162,7 @@ function Delete() {
                         title: "Xóa thành công"
                     });
                     setTimeout(() => {
-                        changeApi('Cart/' + id, 'DELETE', null, () => {
-                            renderCart()
-                        })
+                        changeApi('Cart/' + id, 'DELETE', null, renderCart)
                     }, 2000);
                 }
             })

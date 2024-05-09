@@ -4,7 +4,7 @@
       "id": "1",
       "nameUser": " Nguyễn Văn Thuận",
       "emailUser": "Jumrk03@gmail.com",
-      "passwordUser": "thuan123",
+      "passwordUser": "123",
       "phoneUser": "0373532273"
     },
     {
@@ -189,7 +189,7 @@
       "dateOrder": "8-5-2024",
       "phone": "0373532273",
       "address": "Quảng Nam",
-      "statusOrder": "Đang xác nhận",
+      "statusOrder": "Đang vận chuyển",
       "statusPayment": "Chưa thanh toán",
       "total": "280"
     }
@@ -211,6 +211,15 @@
       "quantityOrder": "1",
       "totalOrder": 230,
       "colorOrder": "blue",
+      "sizeOrder": "M"
+    },
+    {
+      "id": "3",
+      "idOrder": "3",
+      "idProduct": "3",
+      "quantityOrder": 3,
+      "totalOrder": 690,
+      "colorOrder": "black",
       "sizeOrder": "M"
     }
   ],

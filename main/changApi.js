@@ -1,4 +1,4 @@
-var Api = 'http://localhost:3000/'
+const Api = 'http://localhost:3000/'
 export function changeApi(enpoin, method, data,callback) {
     if (method === 'GET') {
         fetch(Api + enpoin)
