@@ -1,6 +1,5 @@
 import { changeApi } from "/main/changApi.js";
 function start() {
-    select_size_color()
     statistics()
     showContent()
     renderProduct()
@@ -9,6 +8,7 @@ function start() {
     renderVoucher()
     renderAccount()
     addVoucher()
+    addProduct()
     document.getElementById('searchInput').addEventListener('input', searchProduct);
 }
 start()
@@ -69,30 +69,121 @@ function statistics() {
     })
 }
 function renderProduct() {
-    axios.get('http://localhost:3000/Product')
-        .then(response => {
-            let data = response.data
-            let html = data.map(data => {
-                return `
-           <tr>
-           <td>${data.id}</td>
-           <td>${data.nameProduct}</td>
-           <td><img src="${data.imageProduct}" alt=""></td>
-           <td>${data.idCategories}</td>
-           <td>${data.brandId}</td>
-           <td>${data.descriptionProduct}</td>
-           <td>${data.priceProduct}</td>
-           <td>${data.quantityProduct}</td>
-           <td>${data.colorProduct}</td>
-           <td>${data.sizeProduct}</td>
-           <td><ion-icon name="settings-outline"></ion-icon>
-               <ion-icon name="trash-outline"></ion-icon>
-           </td>
-       </tr>`
-            }).join('')
-            document.getElementById('renderProduct').innerHTML = html
+    var html = ``
+    changeApi("Product", "GET", null, Courese => {
+        Courese.forEach(data => {
+            renderCategories(data.idCategories, nameCategories => {
+                renderBrand(data.brandId, nameBrand => {
+                    html += `
+                <tr>
+                <td>${data.id}</td>
+                <td>${data.nameProduct}</td>
+                <td><img src="${data.imageProduct}" alt=""></td>
+                <td>${nameCategories}</td>
+                <td>${nameBrand}</td>
+                <td>${data.descriptionProduct}</td>
+                <td>${data.priceProduct}.000VND</td>
+                <td>${data.quantityProduct}</td>
+                <td>${data.colorProduct}</td>
+                <td>${data.sizeProduct}</td>
+                <td><ion-icon name="settings-outline"></ion-icon>
+                    <ion-icon name="trash-outline"></ion-icon>
+                </td>
+            </tr>`
+                    document.getElementById('renderProduct').innerHTML = html
+                })
+            })
         })
+    })
 }
+
+function renderCategories(id, Callback) {
+    changeApi('Categories', "GET", null, Courese => {
+        Courese.forEach(elm => {
+            if (elm.id == id) {
+                Callback(elm.nameCategories)
+            }
+        })
+    })
+}
+function renderBrand(id, Callback) {
+    changeApi('Brand', "GET", null, Courese => {
+        Courese.forEach(elm => {
+            if (elm.id == id) {
+                Callback(elm.nameBrand)
+            }
+        })
+    })
+}
+
+function addProduct() {
+    var btn = document.getElementById('btn-select');
+    var input_color = document.getElementById('color');
+    var input_size = document.getElementById('size');
+    var show_color = document.getElementById('show-color');
+    var show_size = document.getElementById('show-size');
+    var nameProduct = document.getElementById('nameProduct');
+    var categoriesProduct = document.getElementById('categoriesProduct');
+    var brandProduct = document.getElementById('brandProduct');
+    var priceProduct = document.getElementById('priceProduct');
+    var quantityProduct = document.getElementById('quantityProduct');
+    var imgProduct = document.getElementById('imgProduct');
+    var detailProduct = document.getElementById('detailProduct');
+    var btnAdd = document.getElementById('btn-add-Product');
+    var colorArr = [];
+    var sizeArr = [];
+
+    btn.addEventListener('click', () => {
+        if (!colorArr.includes(input_color.value)) {
+            colorArr.push(input_color.value);
+            var span = '';
+            colorArr.forEach(elm => {
+                span += `<span style="height: 20px;margin-right: 5px;width: 20px;display: inline-block; border-radius: 5px; background-color: ${elm};"></span>`;
+            });
+            show_color.innerHTML = span;
+        }
+        if (input_size.value !== '') {
+            if (!sizeArr.includes(input_size.value)) {
+                sizeArr.push(input_size.value);
+                show_size.innerHTML = sizeArr.join(', ');
+            }
+        }
+    });
+   
+    btnAdd.addEventListener('click', () => {
+        if (nameProduct.value == '' || categoriesProduct.value == '' || brandProduct.value == '' || priceProduct.value == '' || quantityProduct.value == '' || imgProduct.value == '' || detailProduct.value == '') {
+            alert('Vui lòng nhập dữ liệu');
+        } else {
+            var file = imgProduct.files[0];
+            var fileReader = new FileReader();
+            fileReader.onload = function (event) {
+                var value_fileReader = event.target.result;
+                changeApi('Product', "GET", null, Courese => {
+                    var id = 0;
+                    Courese.forEach(elm => {
+                        id = parseInt(elm.id);
+                    });
+                    id++;
+                    var data = {
+                        id: id.toString(),
+                        nameProduct: nameProduct.value,
+                        idCategories: categoriesProduct.value,
+                        brandId: brandProduct.value,
+                        imageProduct: value_fileReader,
+                        descriptionProduct: detailProduct.value,
+                        priceProduct: parseInt(priceProduct.value),
+                        quantityProduct: quantityProduct.value,
+                        colorProduct: colorArr,
+                        sizeProduct: sizeArr,
+                    };
+                    changeApi('Product', 'POST', data, renderProduct);
+                });
+            };
+            fileReader.readAsDataURL(file);
+        }
+    });
+}
+
 function searchProduct() {
     var searchValue = document.getElementById('searchInput').value.toLowerCase();
 
@@ -127,33 +218,6 @@ function searchProduct() {
         });
 }
 
-function select_size_color(callback) {
-    var btn = document.getElementById('btn-select');
-    var input_color = document.getElementById('color');
-    var input_size = document.getElementById('size');
-    var show_color = document.getElementById('show-color');
-    var show_size = document.getElementById('show-size');
-    var colorArr = [];
-    var sizeArr = [];
-    btn.addEventListener('click', () => {
-        if (!colorArr.includes(input_color.value)) {
-            colorArr.push(input_color.value);
-            var span = ``
-            colorArr.forEach(elm => {
-                span += `<span style="height: 20px;margin-right: 5px;width: 20px;display: inline-block; border-radius: 5px; background-color: ${elm};"></span>`;
-            })
-            show_color.innerHTML = span
-        }
-        if (input_size.value !== '') {
-            if (!sizeArr.includes(input_size.value)) {
-                sizeArr.push(input_size.value)
-                show_size.innerHTML = sizeArr.join(', ')
-
-            }
-        }
-        callback(sizeArr, colorArr)
-    });
-}
 
 
 function renderOrder() {
@@ -162,7 +226,7 @@ function renderOrder() {
         Courese.forEach(elm => {
             renderUser(elm.idUser, (Name) => {
                 html += ` <tr>
-                <td>${elm.id}</td>
+                <td style ="cursor: pointer;" class="btn-orderdetail" id="${elm.id}" data-bs-toggle="modal" data-bs-target="#orderdetail">${elm.id}</td>
                 <td>${Name}</td>
                 <td>${elm.dateOrder}</td>
                 <td>${elm.phone}</td>
@@ -175,7 +239,52 @@ function renderOrder() {
             </tr>`
                 document.getElementById('show-order').innerHTML = html
                 updateOrder()
+                renderOrderdetail()
             })
+        })
+    })
+}
+function renderOrderdetail() {
+    var list = document.querySelectorAll('.btn-orderdetail')
+    list.forEach(elm => {
+        elm.addEventListener('click', () => {
+            var id = elm.getAttribute('id')
+            var html = ``
+            changeApi('orderDetails', 'GET', null, Courese => {
+                Courese.forEach(elm => {
+                    if (elm.idOrder == id) {
+                        var totalFormat = elm.totalOrder.toLocaleString('vi-VN', { minimumFactionDigits: 0 }) + '.000VND'
+                        renderProductorder(elm.idProduct, (images, name) => {
+                            html += `
+                            <div class="card">
+                            <div class="img">
+                                <img src="${images}" alt="">
+                            </div>
+                            <div class="name-size-color-product">
+                                <b>${name}</b>
+                                <p>${elm.sizeOrder}/${elm.colorOrder}</p>
+                            </div>
+                            <div class="total-product">
+                                <b>x${elm.quantityOrder}</b>
+                                <p>${totalFormat}</p>
+                            </div>
+                        </div>`
+
+                            document.getElementById('show-card').innerHTML = html
+                        })
+                    }
+                })
+            })
+        })
+    })
+
+}
+function renderProductorder(id, Callback) {
+    changeApi('Product', 'GET', null, Courese => {
+        Courese.forEach(elm => {
+            if (elm.id == id) {
+                Callback(elm.imageProduct, elm.nameProduct)
+            }
         })
     })
 }
@@ -310,30 +419,30 @@ function editVoucher() {
         })
     })
 }
-function addVoucher(){
+function addVoucher() {
     var codeVoucher = document.getElementById('codeVoucher')
     var conditionVoucher = document.getElementById('conditionVoucher')
     var valueVoucher = document.getElementById('valueVoucher')
     var btn = document.getElementById('BtnaddVoucher')
-    btn.addEventListener('click',()=>{
-        if(codeVoucher.value == ''||conditionVoucher.value == ''||valueVoucher.value == ''){
+    btn.addEventListener('click', () => {
+        if (codeVoucher.value == '' || conditionVoucher.value == '' || valueVoucher.value == '') {
             alert("Vui lòng nhập dữ liệu")
-        }else{
+        } else {
             var id = 0
-           changeApi("Voucher","GET",null,Courese=>{
-              Courese.forEach(elm=>{
-                 id = parseInt(elm.id)
-              });
-              id++;
-              console.log()
-              var data = {
-                id: id.toString(),
-                codeVoucher: codeVoucher.value,
-                conditionVoucher: parseInt(conditionVoucher.value),
-                valueVoucher: parseInt(valueVoucher.value)
-              }
-              changeApi('Voucher','POST',data,renderVoucher)
-           })
+            changeApi("Voucher", "GET", null, Courese => {
+                Courese.forEach(elm => {
+                    id = parseInt(elm.id)
+                });
+                id++;
+                console.log()
+                var data = {
+                    id: id.toString(),
+                    codeVoucher: codeVoucher.value,
+                    conditionVoucher: parseInt(conditionVoucher.value),
+                    valueVoucher: parseInt(valueVoucher.value)
+                }
+                changeApi('Voucher', 'POST', data, renderVoucher)
+            })
         }
     })
 }

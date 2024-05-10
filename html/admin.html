@@ -42,6 +42,9 @@
                     <li> <ion-icon name="ticket-outline"></ion-icon>
                         <p id="btn-voucher">Quản lý voucher</p>
                     </li>
+                    <li> <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+                        <p id="btn-messenger">Quản lý tin nhắn</p>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -213,9 +216,9 @@
                     <div class="modal-body">
 
                         <div class="mb-3">
-                            <label for="basic-url" class="form-label">Tên sản phẩm</label>
+                            <label for="nameProduct" class="form-label">Tên sản phẩm</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="basic-url"
+                                <input type="text" class="form-control" id="nameProduct"
                                     aria-describedby="basic-addon3 basic-addon4">
                             </div>
                         </div>
@@ -223,19 +226,20 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="" class="form-label">Phân loại sản phẩm</label>
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option value="1">Áo</option>
-                                        <option value="2">Quần</option>
-                                        <option value="3">Sweater</option>
+                                    <label for="categoriesProduct" class="form-label">Phân loại sản phẩm</label>
+                                    <select id="categoriesProduct"  class="form-select" aria-label="Default select example">
+                                        <option value="1">Áo thun</option>
+                                        <option value="2">Áo Polo</option>
+                                        <option value="3">Quần</option>
+                                        <option value="4">sweater</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="" class="form-label">Thuộc thương hiệu</label>
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option value="1">levent</option>
+                                    <label for="brandProduct" class="form-label">Thuộc thương hiệu</label>
+                                    <select id="brandProduct" class="form-select" aria-label="Default select example">
+                                        <option value="1">levents</option>
                                         <option value="2">paradox</option>
                                         <option value="3">lunacy</option>
                                     </select>
@@ -245,24 +249,24 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="" class="form-label">Giá sản phẩm</label>
-                                    <input type="number" class="form-control" id="basic-url"
+                                    <label for="priceProduct" class="form-label">Giá sản phẩm</label>
+                                    <input type="number" class="form-control" id="priceProduct"
                                         aria-describedby="basic-addon3 basic-addon4">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="" class="form-label">Số lượng</label>
-                                    <input type="number" class="form-control" id="basic-url"
+                                    <label for="quantityProduct" class="form-label">Số lượng</label>
+                                    <input type="number" class="form-control" id="quantityProduct"
                                         aria-describedby="basic-addon3 basic-addon4">
                                 </div>
                             </div>
                         </div>
 
                         <div class="mb-3">
-                            <label for="" class="form-label">Chọn ảnh sản phẩm</label>
+                            <label for="imgProduct" class="form-label">Chọn ảnh sản phẩm</label>
                             <div class="input-group mb-3">
-                                <input type="file" class="form-control" id="inputGroupFile01">
+                                <input type="file" class="form-control" id="imgProduct">
                             </div>
                         </div>
                         <div class="row">
@@ -292,15 +296,15 @@
                             <p>Size đã chọn: <span id="show-size"></span></p>
                         </div>
                         <div class="mb-3">
-                            <label for="" class="form-label">Mô tả sản phẩm </label>
+                            <label for="detailProduct" class="form-label">Mô tả sản phẩm </label>
                             <div class="input-group">
-                                <textarea class="form-control" aria-label="With textarea"></textarea>
+                                <textarea class="form-control" aria-label="With textarea" id="detailProduct"></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Xóa</button>
-                        <button type="button" class="btn btn-primary">Thêm sản phẩm</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
+                        <button type="button" id="btn-add-Product" class="btn btn-primary">Thêm sản phẩm</button>
                     </div>
                 </div>
             </div>
@@ -401,6 +405,25 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
                         <button type="button" id="Btn-edit-voucher" class="btn btn-primary">Lưu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- modal orderdetail -->
+        <div class="modal fade" id="orderdetail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Chi tiết đơn hàng</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="content-product" id="show-card">
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
                     </div>
                 </div>
             </div>

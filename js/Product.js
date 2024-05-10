@@ -106,7 +106,8 @@ function select_color() {
     size.forEach((value) => {
         value.addEventListener("change", () => {
             if (value.checked == true) {
-                result.innerHTML = value.value
+                result.className = value.value
+                result.innerHTML = `<span style="height: 20px; border: 1px solid black; margin-right: 5px;width: 20px;display: inline-block; border-radius: 5px; background-color: ${value.value};"></span>`;  
                 console.log(value)
             }
         })
@@ -164,7 +165,7 @@ function add_cart() {
             });
         } else {
             var size_value = size.innerText
-            var color_value = color.innerText
+            var color_value = color.getAttribute('class')
             var id = 0
             if (size_value == '') {
                 Swal.fire({

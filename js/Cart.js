@@ -38,7 +38,7 @@ function renderCart() {
                             <div class="product-color-size">
                                <p>${element.sizeCart}</p>
                                <p>/</p>
-                               <p>${element.colorCart}</p>
+                               <p><span style="height: 15px;margin-left: border: 1px solid black; 5px;width: 15px;display: inline-block; border-radius: 5px; background-color: ${element.colorCart} ;"></span></p>
                             </div>
                         </div>
                     </div>

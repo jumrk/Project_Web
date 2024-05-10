@@ -50,7 +50,7 @@ function renderOrderdetail() {
                     </div>
                     <div class="name-size-color-product">
                         <b>${name}</b>
-                        <p>${elm.sizeOrder}/${elm.colorOrder}</p>
+                        <p>${elm.sizeOrder}/<span style="height: 15px;margin-left: 5px;width: 15px;display: inline-block; border: 1px solid black; border-radius: 5px; background-color: ${elm.colorOrder} ;"></span></p>
                     </div>
                     <div class="total-product">
                         <b>x${elm.quantityOrder}</b>
