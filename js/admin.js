@@ -69,9 +69,9 @@ function statistics() {
         var total = 0
         document.getElementById('total-order').innerHTML = Courese.length
         Courese.forEach(elm => {
-            total += parseFloat(elm.total)
+            total += elm.total
         })
-        var formatTotal = total.toLocaleString('vi-VN', { minimumFractionDigits: 0 }) + ",000VND"
+        var formatTotal = total.toLocaleString('vi-VN', { minimumFractionDigits: 0 }) + ".000VND"
         document.getElementById('total-revenue').innerHTML = formatTotal
     })
 }
@@ -577,12 +577,12 @@ function open_messenger() {
         })
     })
 }
-function delete_messenger(){
+function delete_messenger() {
     var list = document.querySelectorAll('.delete-messenger')
-    list.forEach(elm=>{
-        elm.addEventListener('click',()=>{
+    list.forEach(elm => {
+        elm.addEventListener('click', () => {
             var id = elm.getAttribute('id')
-            changeApi('Messenger/'+id,"DELETE",null,renderMessenger)
+            changeApi('Messenger/' + id, "DELETE", null, renderMessenger)
         })
     })
 }

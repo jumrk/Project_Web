@@ -58,7 +58,7 @@ function renderCart() {
             var totalNumber = totalVoucher + 50
             var formattedTotal = totalNumber.toLocaleString('vi-VN', { minimumFractionDigits: 0 })
             provisional.innerHTML = formattedprovisional
-            total_order.value = formattedTotal
+            total_order.innerHTML = formattedTotal
 
         })) {
             Swal.fire({
@@ -73,7 +73,7 @@ function renderCart() {
             var total_orderValue = total + 50
             var formattedTotalOrder = total_orderValue.toLocaleString('vi-VN', { minimumFractionDigits: 0 })
             provisional.innerHTML = formattedprovisional
-            total_order.value = formattedTotalOrder
+            total_order.innerHTML = formattedTotalOrder
         }
     })
 }
@@ -211,7 +211,7 @@ function performPayment() {
                     address: address_select.value,
                     statusOrder: "Đang xác nhận",
                     statusPayment: "Chưa thanh toán",
-                    total: total.value
+                    total: parseInt(total.innerHTML.replace(/\./g, ''))
                 }
                 const Toast = Swal.mixin({
                     toast: true,
