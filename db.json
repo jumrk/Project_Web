@@ -6,13 +6,6 @@
       "emailUser": "Jumrk03@gmail.com",
       "passwordUser": "thuan",
       "phoneUser": "0373532273"
-    },
-    {
-      "id": "3",
-      "nameUser": " Nguyễn Văn Thuận",
-      "emailUser": "iamjumr03@gmail.com",
-      "passwordUser": "1",
-      "phoneUser": "0373532273"
     }
   ],
   "Address_user": [
@@ -37,16 +30,10 @@
       "brandId": "1",
       "imageProduct": "https://levents.asia/cdn/shop/files/CLASSICSWEATER-MT.jpg?v=1703487601&width=713",
       "descriptionProduct": "Áo sweater oversize có độ dài phủ quá mông,phần tay áo rộng rãi, phần tay áo rộng rãi, form dáng thoải mái, thoáng mát khi mặc.",
-      "priceProduct": 450,
-      "quantityProduct": 10,
-      "colorProduct": [
-        "black"
-      ],
-      "sizeProduct": [
-        "S",
-        "M",
-        "XL"
-      ]
+      "priceProduct": "350",
+      "quantityProduct": "20",
+      "colorProduct": "black",
+      "sizeProduct": "S,M,XL"
     },
     {
       "id": "2",
@@ -111,17 +98,10 @@
       "brandId": "1",
       "imageProduct": "https://levents.asia/cdn/shop/files/DarkGreen_LPASTCON232UG0202SS24_1.jpg?v=1712318357&width=713",
       "descriptionProduct": "Form SweatPants suông thẳng, không quá ôm, không quá rộng mà vẫn đảm bảo mang đến sự thuận tiện và thoải mái cho hoạt động của người mặc một cách tốt nhất.",
-      "priceProduct": 460,
-      "quantityProduct": 30,
-      "colorProduct": [
-        "blue",
-        "black"
-      ],
-      "sizeProduct": [
-        "S",
-        "M",
-        "XL"
-      ]
+      "priceProduct": "450",
+      "quantityProduct": "30",
+      "colorProduct": "blue,black",
+      "sizeProduct": "S,M,XL"
     },
     {
       "id": "6",

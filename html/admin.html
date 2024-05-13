@@ -146,7 +146,7 @@
                                 </tr>
                             </thead>
                             <tbody id="show-account">
-                            
+
                             </tbody>
                         </table>
                     </div>
@@ -198,7 +198,30 @@
                                 </tr>
                             </thead>
                             <tbody id="show-voucher">
-                               
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="show" id="messenger">
+                <div class="title-product">
+                    <h2>Quản lý tin nhắn</h2>
+                </div>
+                <div class="content-product">
+                    <div class="container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Mã</th>
+                                    <th>Tên</th>
+                                    <th>Email</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Lời nhắn</th>
+                                    <th>Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="show-messenger">
                             </tbody>
                         </table>
                     </div>
@@ -227,7 +250,8 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="categoriesProduct" class="form-label">Phân loại sản phẩm</label>
-                                    <select id="categoriesProduct"  class="form-select" aria-label="Default select example">
+                                    <select id="categoriesProduct" class="form-select"
+                                        aria-label="Default select example">
                                         <option value="1">Áo thun</option>
                                         <option value="2">Áo Polo</option>
                                         <option value="3">Quần</option>
@@ -305,6 +329,101 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
                         <button type="button" id="btn-add-Product" class="btn btn-primary">Thêm sản phẩm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- modal editProduct -->
+        <div class="modal fade" id="editProduct" tabindex="-1" aria-labelledby="editProduct" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa sản phẩm</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="mb-3">
+                            <label for="nameProductEdit" class="form-label">Tên sản phẩm</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="nameProductEdit"
+                                    aria-describedby="basic-addon3 basic-addon4">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="categoriesProductEdit" class="form-label">Phân loại sản phẩm</label>
+                                    <select id="categoriesProductEdit" class="form-select"
+                                        aria-label="Default select example">
+                                        <option value="1">Áo thun</option>
+                                        <option value="2">Áo Polo</option>
+                                        <option value="3">Quần</option>
+                                        <option value="4">sweater</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="brandProductEdit" class="form-label">Thuộc thương hiệu</label>
+                                    <select id="brandProductEdit" class="form-select" aria-label="Default select example">
+                                        <option value="1">levents</option>
+                                        <option value="2">paradox</option>
+                                        <option value="3">lunacy</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="priceProductEdit" class="form-label">Giá sản phẩm</label>
+                                    <input type="number" class="form-control" id="priceProductEdit"
+                                        aria-describedby="basic-addon3 basic-addon4">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="quantityProductEdit" class="form-label">Số lượng</label>
+                                    <input type="number" class="form-control" id="quantityProductEdit"
+                                        aria-describedby="basic-addon3 basic-addon4">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="imgProductEdit" class="form-label">Chọn ảnh sản phẩm</label>
+                            <div class="input-group mb-3">
+                                <input type="file" class="form-control" id="imgProductEdit">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="colorEdit" class="form-label">Màu sản phẩm</label>
+                                    <input type="text" class="form-control" id="colorEdit" aria-describedby="basic-addon3 basic-addon4">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="sizeProductEdit" class="form-label">Size sản
+                                        phẩm</label>
+                                    <input type="text" class="form-control" id="sizeProductEdit"
+                                        aria-describedby="basic-addon3 basic-addon4">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="detailProductedit" class="form-label">Mô tả sản phẩm </label>
+                            <div class="input-group">
+                                <textarea class="form-control" aria-label="With textarea" id="detailProductedit"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
+                        <button type="button" id="submit-edit-Product" class="btn btn-primary">Xác nhận</button>
                     </div>
                 </div>
             </div>

@@ -20,7 +20,13 @@ nav {
     border-radius: 0px 40px 0px 0px;
     min-height: 100vh;
 }
-
+#open-messenger{
+    cursor: pointer;
+    white-space: nowrap;
+}
+#open-messenger.active{
+    white-space: inherit;
+}
 .title-nav {
     height: 100px;
     font-size: 30px;

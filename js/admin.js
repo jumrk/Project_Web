@@ -9,6 +9,7 @@ function start() {
     renderAccount()
     addVoucher()
     addProduct()
+    renderMessenger()
     document.getElementById('searchInput').addEventListener('input', searchProduct);
 }
 start()
@@ -19,7 +20,7 @@ function showContent() {
     var btn_account = document.getElementById('btn-account')
     var btn_order = document.getElementById('btn-order')
     var btn_voucher = document.getElementById('btn-voucher')
-
+    var btn_messenger = document.getElementById('btn-messenger')
     btn_thongke.addEventListener('click', () => {
         contents.forEach(elm => {
             elm.classList.remove('active')
@@ -50,6 +51,12 @@ function showContent() {
         })
         contents[4].classList.add('active')
     })
+    btn_messenger.addEventListener('click', () => {
+        contents.forEach(elm => {
+            elm.classList.remove('active')
+        })
+        contents[5].classList.add('active')
+    })
 }
 function statistics() {
     changeApi('Product', 'GET', null, Courese => {
@@ -62,9 +69,9 @@ function statistics() {
         var total = 0
         document.getElementById('total-order').innerHTML = Courese.length
         Courese.forEach(elm => {
-            total += parseInt(elm.total)
+            total += parseFloat(elm.total)
         })
-        var formatTotal = total.toLocaleString('vi-VN', { minimumFractionDigits: 0 }) + ".000VND"
+        var formatTotal = total.toLocaleString('vi-VN', { minimumFractionDigits: 0 }) + ",000VND"
         document.getElementById('total-revenue').innerHTML = formatTotal
     })
 }
@@ -86,11 +93,13 @@ function renderProduct() {
                 <td>${data.quantityProduct}</td>
                 <td>${data.colorProduct}</td>
                 <td>${data.sizeProduct}</td>
-                <td><ion-icon name="settings-outline"></ion-icon>
-                    <ion-icon name="trash-outline"></ion-icon>
+                <td><ion-icon class="edit" id="${data.id}" data-bs-toggle="modal" data-bs-target="#editProduct" name="settings-outline"></ion-icon>
+                    <ion-icon class="delete-product" id="${data.id}" name="trash-outline"></ion-icon>
                 </td>
             </tr>`
                     document.getElementById('renderProduct').innerHTML = html
+                    editProduct()
+                    deleteProduct()
                 })
             })
         })
@@ -115,7 +124,6 @@ function renderBrand(id, Callback) {
         })
     })
 }
-
 function addProduct() {
     var btn = document.getElementById('btn-select');
     var input_color = document.getElementById('color');
@@ -149,7 +157,7 @@ function addProduct() {
             }
         }
     });
-   
+
     btnAdd.addEventListener('click', () => {
         if (nameProduct.value == '' || categoriesProduct.value == '' || brandProduct.value == '' || priceProduct.value == '' || quantityProduct.value == '' || imgProduct.value == '' || detailProduct.value == '') {
             alert('Vui lòng nhập dữ liệu');
@@ -183,7 +191,104 @@ function addProduct() {
         }
     });
 }
-
+function editProduct() {
+    var list = document.querySelectorAll('.edit')
+    var nameProductEdit = document.getElementById('nameProductEdit')
+    var categoriesProductEdit = document.getElementById('categoriesProductEdit')
+    var brandProductEdit = document.getElementById('brandProductEdit')
+    var priceProductEdit = document.getElementById('priceProductEdit')
+    var quantityProductEdit = document.getElementById('quantityProductEdit')
+    var imgProductEdit = document.getElementById('imgProductEdit')
+    var colorEdit = document.getElementById('colorEdit')
+    var sizeProductEdit = document.getElementById('sizeProductEdit')
+    var detailProductedit = document.getElementById('detailProductedit')
+    var btn = document.getElementById('submit-edit-Product')
+    list.forEach(elm => {
+        elm.addEventListener('click', () => {
+            var id = elm.getAttribute('id')
+            renderelementProduct(id, (nameProduct, idCategories, brandId, imageProduct, descriptionProduct, priceProduct, quantityProduct, colorProduct, sizeProduct) => {
+                nameProductEdit.value = nameProduct
+                categoriesProductEdit.value = idCategories
+                brandProductEdit.value = brandId
+                priceProductEdit.value = priceProduct
+                quantityProductEdit.value = quantityProduct
+                sizeProductEdit.value = sizeProduct
+                detailProductedit.value = descriptionProduct
+                colorEdit.value = colorProduct
+                btn.addEventListener('click', () => {
+                    if (imgProductEdit.value == '') {
+                        if (nameProductEdit.value == '' ||
+                            categoriesProductEdit.value == '' ||
+                            brandProductEdit.value == '' ||
+                            priceProductEdit.value == '' ||
+                            quantityProductEdit.value == '' ||
+                            sizeProductEdit.value == '' ||
+                            detailProductedit.value == '' ||
+                            colorEdit.value == '') {
+                            alert('Vui lòng nhập dữ liệu')
+                        } else {
+                            var data = {
+                                id: id,
+                                nameProduct: nameProductEdit.value,
+                                idCategories: categoriesProductEdit.value,
+                                brandId: brandProductEdit.value,
+                                imageProduct: imageProduct,
+                                descriptionProduct: detailProductedit.value,
+                                priceProduct: priceProductEdit.value,
+                                quantityProduct: quantityProductEdit.value,
+                                colorProduct: colorEdit.value,
+                                sizeProduct: sizeProductEdit.value
+                            }
+                            changeApi('Product/' + id, "PUT", data, renderProduct)
+                        }
+                    } else {
+                        if (nameProductEdit.value == '' ||
+                            categoriesProductEdit.value == '' ||
+                            brandProductEdit.value == '' ||
+                            priceProductEdit.value == '' ||
+                            quantityProductEdit.value == '' ||
+                            sizeProductEdit.value == '' ||
+                            detailProductedit.value == '' ||
+                            colorEdit.value == '' ||
+                            imgProductEdit.value == ''
+                        ) {
+                            alert('Vui lòng nhập dữ liệu')
+                        } else {
+                            var file = imgProductEdit.files[0]
+                            var fileReader = new FileReader()
+                            fileReader.onload = function (event) {
+                                var file_value = event.target.result
+                                var data = {
+                                    id: id,
+                                    nameProduct: nameProductEdit.value,
+                                    idCategories: categoriesProductEdit.value,
+                                    brandId: brandProductEdit.value,
+                                    imageProduct: file_value,
+                                    descriptionProduct: detailProductedit.value,
+                                    priceProduct: priceProductEdit.value,
+                                    quantityProduct: quantityProductEdit.value,
+                                    colorProduct: colorEdit.value,
+                                    sizeProduct: sizeProductEdit.value
+                                }
+                                changeApi('Product/' + id, 'PUT', data, renderProduct)
+                            }
+                            fileReader.readAsDataURL(file)
+                        }
+                    }
+                })
+            })
+        })
+    })
+}
+function deleteProduct() {
+    var list = document.querySelectorAll('.delete-product')
+    list.forEach(elm => {
+        elm.addEventListener('click', () => {
+            var id = elm.getAttribute('id')
+            changeApi('Product/' + id, "DELETE", null, renderProduct)
+        })
+    })
+}
 function searchProduct() {
     var searchValue = document.getElementById('searchInput').value.toLowerCase();
 
@@ -217,9 +322,6 @@ function searchProduct() {
             document.getElementById('renderProduct').innerHTML = html;
         });
 }
-
-
-
 function renderOrder() {
     changeApi('Order', 'GET', null, Courese => {
         var html = ``
@@ -254,14 +356,14 @@ function renderOrderdetail() {
                 Courese.forEach(elm => {
                     if (elm.idOrder == id) {
                         var totalFormat = elm.totalOrder.toLocaleString('vi-VN', { minimumFactionDigits: 0 }) + '.000VND'
-                        renderProductorder(elm.idProduct, (images, name) => {
+                        renderelementProduct(elm.idProduct, (nameProduct, idCategories, brandId, imageProduct, descriptionProduct, priceProduct, quantityProduct, colorProduct, sizeProduct) => {
                             html += `
                             <div class="card">
                             <div class="img">
-                                <img src="${images}" alt="">
+                                <img src="${imageProduct}" alt="">
                             </div>
                             <div class="name-size-color-product">
-                                <b>${name}</b>
+                                <b>${nameProduct}</b>
                                 <p>${elm.sizeOrder}/${elm.colorOrder}</p>
                             </div>
                             <div class="total-product">
@@ -279,11 +381,11 @@ function renderOrderdetail() {
     })
 
 }
-function renderProductorder(id, Callback) {
+function renderelementProduct(id, Callback) {
     changeApi('Product', 'GET', null, Courese => {
         Courese.forEach(elm => {
             if (elm.id == id) {
-                Callback(elm.imageProduct, elm.nameProduct)
+                Callback(elm.nameProduct, elm.idCategories, elm.brandId, elm.imageProduct, elm.descriptionProduct, elm.priceProduct, elm.quantityProduct, elm.colorProduct, elm.sizeProduct)
             }
         })
     })
@@ -444,5 +546,43 @@ function addVoucher() {
                 changeApi('Voucher', 'POST', data, renderVoucher)
             })
         }
+    })
+}
+function renderMessenger() {
+    changeApi('Messenger', "GET", null, Courese => {
+        var html = ``
+        Courese.forEach(elm => {
+            html += ` <tr>
+            <td>${elm.id}</td>
+            <td>${elm.Name}</td>
+            <td>${elm.Email}</td>
+            <td>${elm.Phone}</td>
+            <td id="open-messenger">${elm.comment}</td>
+            <td> <ion-icon  class="delete-messenger" id="${elm.id}"name="trash-outline"></ion-icon></td>
+        </tr>`
+        })
+        document.getElementById('show-messenger').innerHTML = html
+        open_messenger()
+        delete_messenger()
+    })
+}
+function open_messenger() {
+    var list = document.querySelectorAll('#open-messenger')
+    list.forEach(elm => {
+        elm.addEventListener('click', () => {
+            list.forEach(elm => {
+                elm.classList.remove('active')
+            })
+            elm.classList.add('active')
+        })
+    })
+}
+function delete_messenger(){
+    var list = document.querySelectorAll('.delete-messenger')
+    list.forEach(elm=>{
+        elm.addEventListener('click',()=>{
+            var id = elm.getAttribute('id')
+            changeApi('Messenger/'+id,"DELETE",null,renderMessenger)
+        })
     })
 }
