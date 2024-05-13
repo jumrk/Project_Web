@@ -42,14 +42,16 @@ function renderOrderdetail() {
         Courese.forEach(elm => {
             if (elm.idOrder == getParam()) {
                 var totalFormat = elm.totalOrder.toLocaleString('vi-VN', { minimumFactionDigits: 0 }) + '.000VND'
-                renderProduct(elm.idProduct, (images, name) => {
+                renderProduct(elm.idProduct, (imageProduct, nameProduct, priceProduct,
+                    idCategories, brandId, descriptionProduct, quantityProduct,
+                    colorProduct, sizeProduct) => {
                     html += `
                     <div class="card">
                     <div class="img">
-                        <img src="${images}" alt="">
+                        <img src="${imageProduct}" alt="">
                     </div>
                     <div class="name-size-color-product">
-                        <b>${name}</b>
+                        <b>${nameProduct}</b>   
                         <p>${elm.sizeOrder}/<span style="height: 15px;margin-left: 5px;width: 15px;display: inline-block; border: 1px solid black; border-radius: 5px; background-color: ${elm.colorOrder} ;"></span></p>
                     </div>
                     <div class="total-product">
@@ -66,9 +68,11 @@ function renderOrderdetail() {
 }
 function renderProduct(id, Callback) {
     changeApi('Product', 'GET', null, Courese => {
-        Courese.forEach(elm => {
-            if (elm.id == id) {
-                Callback(elm.imageProduct, elm.nameProduct)
+        Courese.forEach(element => {
+            if (element.id == id) {
+                Callback(element.imageProduct, element.nameProduct, element.priceProduct,
+                    element.idCategories, element.brandId, element.descriptionProduct, element.quantityProduct,
+                    element.colorProduct, element.sizeProduct)
             }
         })
     })
@@ -127,9 +131,27 @@ function deleteOrder() {
                                 });
                                 setTimeout(() => {
                                     changeApi('orderDetails', 'GET', null, Courese => {
-                                        Courese.forEach(elm => {
-                                            if (elm.idOrder == getParam()) {
-                                                changeApi('orderDetails/' + elm.id, 'DELETE', null, null)
+                                        Courese.forEach(element => {
+                                            if (element.idOrder == getParam()) {
+                                                renderProduct(element.idProduct, (imageProduct, nameProduct, priceProduct,
+                                                    idCategories, brandId, descriptionProduct, quantityProduct,
+                                                    colorProduct, sizeProduct) => {
+                                                    var data = {
+                                                        id: element.idProduct,
+                                                        nameProduct: nameProduct,
+                                                        idCategories: idCategories,
+                                                        brandId: brandId,
+                                                        imageProduct: imageProduct,
+                                                        descriptionProduct: descriptionProduct,
+                                                        priceProduct: priceProduct,
+                                                        quantityProduct: parseInt(quantityProduct) + parseInt(element.quantityOrder),
+                                                        colorProduct: colorProduct,
+                                                        sizeProduct: sizeProduct,
+                                                    }
+                                                    changeApi('Product/' + element.idProduct, 'PUT', data, null)
+                                                    changeApi('orderDetails/' + element.id, 'DELETE', null, null)
+                                                })
+
                                             }
                                         })
                                     })

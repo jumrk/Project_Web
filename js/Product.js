@@ -15,6 +15,7 @@ function render_product() {
     var view_name = document.getElementById('view_name')
     var view_brand = document.getElementById('Show-brand')
     var view_price = document.getElementById('view_price')
+    var view_quantity = document.getElementById('show-quantity')
     var view_description = document.getElementById('show-descript')
     changeApi('Product', 'GET', null, (Courese) => {
         Courese.forEach(elm => {
@@ -24,6 +25,7 @@ function render_product() {
                 view_name.innerHTML = elm.nameProduct
                 view_price.innerHTML = formatted + '.000'
                 view_description.innerHTML = elm.descriptionProduct
+                view_quantity.innerHTML = elm.quantityProduct
                 render_brand(elm.brandId, nameBrand => {
                     view_brand.innerHTML = nameBrand.toUpperCase()
                 })
@@ -107,7 +109,7 @@ function select_color() {
         value.addEventListener("change", () => {
             if (value.checked == true) {
                 result.className = value.value
-                result.innerHTML = `<span style="height: 20px; border: 1px solid black; margin-right: 5px;width: 20px;display: inline-block; border-radius: 5px; background-color: ${value.value};"></span>`;  
+                result.innerHTML = `<span style="height: 20px; border: 1px solid black; margin-right: 5px;width: 20px;display: inline-block; border-radius: 5px; background-color: ${value.value};"></span>`;
                 console.log(value)
             }
         })
@@ -185,36 +187,45 @@ function add_cart() {
                         id = elm.id
                     })
                     id++
-                    getPriceProduct(idProduct, price => {
-                        var totalCart = parseInt(quantity_value) * parseInt(price)
-                        var data = {
-                            id: id.toString(),
-                            idProduct: idProduct,
-                            idUser: getSession(),
-                            quantityCart: quantity_value,
-                            totalCart: totalCart,
-                            sizeCart: size_value,
-                            colorCart: color_value
-                        }
-                        console.log(data)
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: "top-end",
-                            showConfirmButton: false,
-                            timer: 2000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.onmouseenter = Swal.stopTimer;
-                                toast.onmouseleave = Swal.resumeTimer;
+                    getPriceQuantityProduct(idProduct,(price,quantity)  => {
+                        if(quantity_value > quantity){
+                            Swal.fire({
+                                title: "Cảnh báo",
+                                text: 'Số lượng kho của sản phẩm chỉ còn '+quantity+'',
+                                icon: "error"
+                            })
+                        }else{
+                            var totalCart = parseInt(quantity_value) * parseInt(price)
+                            var data = {
+                                id: id.toString(),
+                                idProduct: idProduct,
+                                idUser: getSession(),
+                                quantityCart: quantity_value,
+                                totalCart: totalCart,
+                                sizeCart: size_value,
+                                colorCart: color_value
                             }
-                        });
-                        Toast.fire({
-                            icon: "success",
-                            title: "Thêm giỏ hàng thành công"
-                        });
-                        setTimeout(() => {
-                            changeApi('Cart', "POST", data, null)
-                        }, 2000);
+                            console.log(data)
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: "top-end",
+                                showConfirmButton: false,
+                                timer: 2000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.onmouseenter = Swal.stopTimer;
+                                    toast.onmouseleave = Swal.resumeTimer;
+                                }
+                            });
+                            Toast.fire({
+                                icon: "success",
+                                title: "Thêm giỏ hàng thành công"
+                            });
+                            setTimeout(() => {
+                                changeApi('Cart', "POST", data, null)
+                            }, 2000);
+                        }
+                        
                     })
 
                 })
@@ -222,11 +233,11 @@ function add_cart() {
         }
     })
 }
-function getPriceProduct(id, Callback) {
+function getPriceQuantityProduct(id, Callback) {
     changeApi('Product', 'GET', null, Courese => {
         Courese.forEach(elm => {
             if (elm.id == id) {
-                Callback(elm.priceProduct)
+                Callback(elm.priceProduct,elm.quantityProduct)
                 return
             }
         })

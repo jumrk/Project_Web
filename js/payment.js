@@ -29,13 +29,15 @@ function renderCart() {
     changeApi('Cart', 'GET', null, Courese => {
         Courese.forEach(element => {
             if (element.idUser == getSession()) {
-                renderProduct(element.idProduct, (imgProduct, nameProduct, priceProduct) => {
+                renderProduct(element.idProduct, (imageProduct, nameProduct, priceProduct,
+                    idCategories, brandId, descriptionProduct, quantityProduct,
+                    colorProduct, sizeProduct) => {
                     var subtotal = element.totalCart
                     var formattedTotal = subtotal.toLocaleString('vi-VN', { minimumFractionDigits: 0 })
                     html += ` 
                     <div class="product">
                     <div class="img-product">
-                        <img src="${imgProduct}" alt="">
+                        <img src="${imageProduct}" alt="">
                         <label>${element.quantityCart}</label>
                     </div>
                     <div class="infor-product">
@@ -81,7 +83,9 @@ function renderProduct(id, Callback) {
     changeApi('Product', 'GET', null, Courese => {
         Courese.forEach(element => {
             if (element.id == id) {
-                Callback(element.imageProduct, element.nameProduct, element.priceProduct)
+                Callback(element.imageProduct, element.nameProduct, element.priceProduct,
+                    element.idCategories, element.brandId, element.descriptionProduct, element.quantityProduct,
+                    element.colorProduct, element.sizeProduct)
             }
         })
     })
@@ -248,12 +252,32 @@ function performPayment() {
                                         colorOrder: element.colorCart,
                                         sizeOrder: element.sizeCart
                                     }
-                                    changeApi('orderDetails', 'POST', dataOrderdetail, null)
-                                    changeApi('Cart/' + element.id, 'DELETE', null, null)
+                                    changeApi('orderDetails', 'POST', dataOrderdetail, () => {
+                                        renderProduct(element.idProduct, (imageProduct, nameProduct, priceProduct,
+                                            idCategories, brandId, descriptionProduct, quantityProduct,
+                                            colorProduct, sizeProduct) => {
+                                            var data = {
+                                                id: element.idProduct,
+                                                nameProduct: nameProduct,
+                                                idCategories: idCategories,
+                                                brandId: brandId,
+                                                imageProduct: imageProduct,
+                                                descriptionProduct: descriptionProduct,
+                                                priceProduct: priceProduct,
+                                                quantityProduct: parseInt(quantityProduct) - parseInt(element.quantityCart),
+                                                colorProduct: colorProduct,
+                                                sizeProduct: sizeProduct,
+                                            }
+
+                                            changeApi('Product/' + element.idProduct, 'PUT', data, () => {
+                                                changeApi('Cart/' + element.id, 'DELETE', null, () => {
+                                                    window.location.href = '/html/User.html'
+                                                })
+                                            })
+                                        })
+                                    })
                                 }
                             })
-
-                            window.location.href = '/html/User.html'
                         })
                     })
                 }, 2000);

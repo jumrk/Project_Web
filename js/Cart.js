@@ -210,9 +210,26 @@ function eventCopyVoucher() {
 function payment() {
     var btn = document.getElementById('payment')
     btn.addEventListener('click', () => {
-        loading()
-        setTimeout(() => {
-            window.location.href = '/html/payment.html'
-        }, 1000);
+        changeApi('Cart', "GET", null, Courese => {
+            Courese.forEach(elm => {
+                if (elm.idUser == getSession()) {
+                    renderProduct(elm.idProduct, (nameProduct, id, imageProduct, priceProduct, quantityProduct) => {
+                        if (elm.quantityCart > quantityProduct) {
+                            Swal.fire({
+                                title: "Cảnh báo",
+                                text: "Sản phẩm " + nameProduct + " số lượng chỉ còn " + quantityProduct + " ",
+                                icon: "error"
+                            })
+                        } else {
+                            loading()
+                            setTimeout(() => {
+                                window.location.href = '/html/payment.html'
+                            }, 1000);
+                        }
+                    })
+                }
+            }
+            )
+        })
     })
 }
