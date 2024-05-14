@@ -178,7 +178,17 @@
       "nameCategories": "sweater"
     }
   ],
-  "Cart": [],
+  "Cart": [
+    {
+      "id": "1",
+      "idProduct": "6",
+      "idUser": "1",
+      "quantityCart": "1",
+      "totalCart": 325,
+      "sizeCart": "M",
+      "colorCart": null
+    }
+  ],
   "Order": [
     {
       "id": "1",
@@ -186,7 +196,7 @@
       "dateOrder": "13-5-2024",
       "phone": "0373532273",
       "address": "Quảng Nam",
-      "statusOrder": "Đang xác nhận",
+      "statusOrder": "Xác nhận thành công",
       "statusPayment": "Chưa thanh toán",
       "total": 1275
     },
@@ -196,7 +206,7 @@
       "dateOrder": "13-5-2024",
       "phone": "0373532273",
       "address": "Quảng Nam",
-      "statusOrder": "Đang xác nhận",
+      "statusOrder": "Đang vận chuyển",
       "statusPayment": "Chưa thanh toán",
       "total": 1330
     }

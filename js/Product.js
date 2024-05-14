@@ -175,7 +175,7 @@ function add_cart() {
                     text: "Vui lòng chọn size sản phẩm",
                     icon: "error"
                 })
-            } else if (color_value == '') {
+            } else if (color_value == null) {
                 Swal.fire({
                     title: "Cảnh báo",
                     text: "Vui lòng chọn màu sản phẩm",
@@ -187,14 +187,14 @@ function add_cart() {
                         id = elm.id
                     })
                     id++
-                    getPriceQuantityProduct(idProduct,(price,quantity)  => {
-                        if(quantity_value > quantity){
+                    getPriceQuantityProduct(idProduct, (price, quantity) => {
+                        if (quantity_value > quantity) {
                             Swal.fire({
                                 title: "Cảnh báo",
-                                text: 'Số lượng kho của sản phẩm chỉ còn '+quantity+'',
+                                text: 'Số lượng kho của sản phẩm chỉ còn ' + quantity + '',
                                 icon: "error"
                             })
-                        }else{
+                        } else {
                             var totalCart = parseInt(quantity_value) * parseInt(price)
                             var data = {
                                 id: id.toString(),
@@ -225,7 +225,7 @@ function add_cart() {
                                 changeApi('Cart', "POST", data, null)
                             }, 2000);
                         }
-                        
+
                     })
 
                 })
@@ -237,7 +237,7 @@ function getPriceQuantityProduct(id, Callback) {
     changeApi('Product', 'GET', null, Courese => {
         Courese.forEach(elm => {
             if (elm.id == id) {
-                Callback(elm.priceProduct,elm.quantityProduct)
+                Callback(elm.priceProduct, elm.quantityProduct)
                 return
             }
         })
