@@ -41,6 +41,7 @@ function form_edit_user() {
     var userEmail = document.getElementById('userEmail')
     var userPhone = document.getElementById('userPhone')
     var btn_submit = document.getElementById('btn-edit-user')
+    const hasNumber = /\d/;
     show_form('btn-show-form', 'form-edit-user', 'close-form')
     changeApi('User', 'GET', null, (Courses) => {
         Courses.forEach(element => {
@@ -49,9 +50,36 @@ function form_edit_user() {
                 userEmail.value = element.emailUser
                 userPhone.value = element.phoneUser
                 btn_submit.addEventListener('click', () => {
+                    const isValue = (userName.value == "" || userEmail.value == "" || userPhone.value == "")
+                    const isLengthName = (userName.value.length < 5);
+                    const isFormatName = (hasNumber.test(userName.value));
                     var emailIsDuplicate = Courses.some((courses) => {
                         return courses.emailUser === userEmail.value && courses.id !== getSession()
                     });
+                    if (isValue) {
+                        Swal.fire({
+                            title: "Cảnh báo",
+                            text: "Vui lòng nhập dữ liệu",
+                            icon: "error"
+                        });
+                        return false;
+                    }
+                    if (isLengthName) {
+                        Swal.fire({
+                            title: "Cảnh báo",
+                            text: "Tên ít nhất phải 5 ký tự",
+                            icon: "error"
+                        });
+                        return false;
+                    }
+                    if (isFormatName) {
+                        Swal.fire({
+                            title: "Cảnh báo",
+                            text: "Tên không nên chứa số",
+                            icon: "error"
+                        });
+                        return false;
+                    }
                     if (emailIsDuplicate) {
                         Swal.fire({
                             title: "Cảnh báo",
